@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # Database for the User Microservice
+  user-db:
+    image: postgres:14-alpine
+    container_name: user-db
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: your_strong_password
+    ports:
+      - "5432:5432" # Exposes port for local access (optional)
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+
+  # Database for the Salon Microservice
+  salon-db:
+    image: postgres:14-alpine
+    container_name: salon-db
+    environment:
+      POSTGRES_DB: salon_db
+      POSTGRES_USER: salon
+      POSTGRES_PASSWORD: your_strong_password
+    ports:
+      - "5433:5432" # Exposes on a different port to avoid conflict
+    volumes:
+      - salon-db-data:/var/lib/postgresql/data
+ 
+volumes:
+  user-db-data:
+  salon-db-data:
