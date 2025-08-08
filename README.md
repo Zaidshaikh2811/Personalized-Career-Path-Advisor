@@ -1,1 +1,1 @@
-# springboot_salon
+# Personalized Career Path Advisor
