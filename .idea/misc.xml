@@ -8,7 +8,21 @@
         <option value="$PROJECT_DIR$/news-fetcher-service/pom.xml" />
         <option value="$PROJECT_DIR$/summary-generator-service/pom.xml" />
         <option value="$PROJECT_DIR$/category-classifier-service/pom.xml" />
+        <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/resume-parser-service/pom.xml" />
+        <option value="$PROJECT_DIR$/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/career-service/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/ai-advisor-service/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/auth-user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/category-classifier-service/pom.xml" />
+        <option value="$PROJECT_DIR$/news-fetcher-service/pom.xml" />
+        <option value="$PROJECT_DIR$/summary-generator-service/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_24" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">

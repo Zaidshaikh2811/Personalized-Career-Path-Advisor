@@ -2,34 +2,51 @@ version: '3.8'
 
 services:
   redis:
-    image: redis:latest
+    image: redis:alpine
     ports:
       - "6379:6379"
 
-  news-fetcher:
-    build: ./news-fetcher-service
+
+
+  user-service:
+    build: ./user-service
     ports:
       - "8081:8081"
-    depends_on:
-      - redis
 
-  summary-generator:
-    build: ./summary-generator-service
+
+  resume-parser-service:
+    build: ./resume-parser-service
     ports:
       - "8082:8082"
-    depends_on:
-      - redis
 
-  category-classifier:
-    build: ./category-classifier-service
+
+  career-service:
+    build: ./career-service
     ports:
       - "8083:8083"
-    depends_on:
-      - redis
 
-  auth-user:
-    build: ./auth-user-service
+
+  ai-advisor-service:
+    build: ./ai-advisor-service
     ports:
       - "8084:8084"
     depends_on:
       - redis
+
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - redis
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+      - resume-parser-service
+      - career-service
+      - ai-advisor-service
+      - notification-service
