@@ -1,0 +1,50 @@
+package com.child1.user_service.controller;
+
+
+import com.child1.user_service.Dto.RegisterRequest;
+import com.child1.user_service.Dto.UserResponseDto;
+import com.child1.user_service.Service.UserService;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/users")
+@AllArgsConstructor
+
+public class UserController {
+
+    private UserService userService;
+
+
+    @GetMapping()
+    public ResponseEntity<List<UserResponseDto>> getUsers() {
+        return ResponseEntity.ok(  userService.getUsers()  );
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody RegisterRequest userResponseDto ) {
+        return ResponseEntity.ok(userService.createUser(userResponseDto));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id) {
+        return ResponseEntity.ok(
+                userService.updateUser(id)
+        );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable Long id) {
+        return ResponseEntity.ok(
+                userService.deleteUser(id)
+        );
+    }
+
+
+
+
+}
