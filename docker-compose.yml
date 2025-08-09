@@ -7,7 +7,7 @@ services:
     container_name: my-postgres-container
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin@123
+      POSTGRES_PASSWORD: admin123
       POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
@@ -21,7 +21,7 @@ services:
     container_name: my-mongo-container
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: admin@123
+      MONGO_INITDB_ROOT_PASSWORD: admin123
     ports:
       - "27017:27017"
     volumes:
