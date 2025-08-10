@@ -5,17 +5,32 @@ import com.child1.activity_service.Dto.ActivityRequestDto;
 import com.child1.activity_service.Dto.ActivityResponseDto;
 import com.child1.activity_service.Model.Activity;
 import com.child1.activity_service.repo.ActivityRepo;
-import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ActivityService {
 
     private ActivityRepo activityRepo;
     private final GetUser getUser;
+    private RabbitTemplate rabbitTemplate;
+    public ActivityService(ActivityRepo activityRepo, GetUser getUser, RabbitTemplate rabbitTemplate) {
+        this.activityRepo = activityRepo;
+        this.rabbitTemplate = rabbitTemplate;
+        this.getUser = getUser;
+    }
+
+
+    @Value("${rabbitmq.exchange.name}")
+    private String exchange;
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
+    @Value("${rabbitmq.queue.name}")
+    private String queueName;
+
 
     public List<ActivityResponseDto> getAllActivities() {
         List<Activity> activityList = activityRepo.findAll();
@@ -47,6 +62,22 @@ public class ActivityService {
         response.setAdditionalMetrics(activity.getAdditionalMetrics());
 
         activityRepo.save(response.toEntity());
+
+
+
+        try{
+            rabbitTemplate.convertAndSend(exchange, routingKey, response);
+            System.out.println("Activity sent to RabbitMQ: " + response);
+
+
+
+        } catch (Exception e) {
+            System.err.println("Failed to send activity to RabbitMQ: " + e.getMessage());
+            throw new RuntimeException("Failed to send activity to RabbitMQ", e);
+        }
+
+
+
         return response;
 
     }

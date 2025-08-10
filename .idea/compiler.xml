@@ -10,7 +10,7 @@
         <module name="server" />
         <module name="ai_service" />
       </profile>
-      <profile name="Annotation profile for user_service" enabled="true">
+      <profile name="Annotation profile for activity_service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

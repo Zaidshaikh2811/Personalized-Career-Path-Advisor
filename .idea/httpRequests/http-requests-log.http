@@ -1,3 +1,81 @@
+GET http://localhost:8082/api/v1/activities
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T165617.200.json
+
+###
+
+POST http://localhost:8082/api/v1/activities/create
+Content-Type: application/json
+Content-Length: 213
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "duration": 30,
+  "caloriesBurned": 250,
+  "startTime": "2025-08-10T09:00:00",
+  "activityType": "RUNNING",
+  "additionalMetrics": {
+    "distance": 5.2,
+    "steps": 7000,
+    "location": "Central Park"
+  }
+}
+
+<> 2025-08-10T165254.400.json
+
+###
+
+POST http://localhost:8082/api/v1/activities/create
+Content-Type: application/json
+Content-Length: 211
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "activityType": "DANCE",
+  "duration": 45,
+  "caloriesBurned": 350,
+  "startTime": "2025-08-10T10:30:00",
+  "additionalMetrics": {
+    "distance": 7.5,
+    "steps": 9500,
+    "location": "Central Park"
+  }
+}
+
+<> 2025-08-10T165127.400.json
+
+###
+
+POST http://localhost:8082/api/v1/activities/create
+Content-Type: application/json
+Content-Length: 213
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "activityType": "Running",
+  "duration": 45,
+  "caloriesBurned": 350,
+  "startTime": "2025-08-10T10:30:00",
+  "additionalMetrics": {
+    "distance": 7.5,
+    "steps": 9500,
+    "location": "Central Park"
+  }
+}
+
+<> 2025-08-10T165056.400.json
+
+###
+
 GET http://localhost:8083/recommendations/1
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
 Accept-Encoding: br, deflate, gzip, x-gzip
