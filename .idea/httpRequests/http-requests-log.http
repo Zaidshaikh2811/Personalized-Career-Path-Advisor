@@ -1,0 +1,9 @@
+GET http://localhost:8082/api/v1/activities
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T092037.200.json
+
+###
+
