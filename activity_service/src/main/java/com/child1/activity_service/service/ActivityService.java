@@ -55,6 +55,8 @@ public class ActivityService {
     public ActivityResponseDto createActivity(ActivityRequestDto activity) {
         ActivityResponseDto response = new ActivityResponseDto();
 
+
+
         response.setActivityType(activity.getActivityType());
         response.setDuration(activity.getDuration());
         response.setCaloriesBurned(activity.getCaloriesBurned());

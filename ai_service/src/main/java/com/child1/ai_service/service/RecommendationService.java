@@ -17,6 +17,7 @@ public class RecommendationService {
 
     private final RecommendationRepo recommendationRepo;
 
+
     public List<Recommendation> getAllRecommendations() {
         return recommendationRepo.findAll();
     }
