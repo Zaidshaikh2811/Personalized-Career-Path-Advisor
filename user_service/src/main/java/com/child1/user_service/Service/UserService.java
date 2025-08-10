@@ -20,7 +20,15 @@ public class UserService {
 
     // Example method to create a user
     public UserResponseDto createUser(RegisterRequest userResponseDto) {
-        // Check if user with email already exists
+        if (userResponseDto == null) {
+            throw new IllegalArgumentException("User data must not be null");
+        }
+        if (userResponseDto.getEmail() == null || userResponseDto.getEmail().isBlank()) {
+            throw new IllegalArgumentException("Email must not be null or blank");
+        }
+        if (userResponseDto.getPassword() == null || userResponseDto.getPassword().isBlank()) {
+            throw new IllegalArgumentException("Password must not be null or blank");
+        }
         if (userRepository.existsByEmail(userResponseDto.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
@@ -49,8 +57,12 @@ public class UserService {
 
      // Example method to update a user
     public UserResponseDto updateUser(Long id) {
-
-        // Logic to update a user by id
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null");
+        }
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID must be greater than zero");
+        }
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         // Update user fields as needed
         User updatedUser = userRepository.save(user);
@@ -69,6 +81,12 @@ public class UserService {
 
     // Example method to delete a user
     public UserResponseDto deleteUser(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null");
+        }
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID must be greater than zero");
+        }
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(user);
         UserResponseDto responseDto = new UserResponseDto();
@@ -85,6 +103,9 @@ public class UserService {
     public List<UserResponseDto> getUsers() {
 
         List<User> users = userRepository.findAll();
+        if (users == null || users.isEmpty()) {
+            throw new RuntimeException("No users found");
+        }
         return users.stream().map(user -> {
             UserResponseDto responseDto = new UserResponseDto();
 
@@ -97,4 +118,41 @@ public class UserService {
         }).toList();
     }
 
+    public UserResponseDto getUserById(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null");
+        }
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID must be greater than zero");
+        }
+
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        UserResponseDto responseDto = new UserResponseDto();
+
+        responseDto.setName(user.getName());
+        responseDto.setEmail(user.getEmail());
+        responseDto.setFirstName(user.getFirstName());
+        responseDto.setLastName(user.getLastName());
+        responseDto.setRole(user.getRole());
+
+        return responseDto;
+    }
+
+    public UserResponseDto getUserByEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email must not be null or blank");
+        }
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("User not found with the provided email");
+        }
+        UserResponseDto responseDto = new UserResponseDto();
+        responseDto.setName(user.getName());
+        responseDto.setEmail(user.getEmail());
+        responseDto.setFirstName(user.getFirstName());
+        responseDto.setLastName(user.getLastName());
+        responseDto.setRole(user.getRole());
+        return responseDto;
+    }
 }

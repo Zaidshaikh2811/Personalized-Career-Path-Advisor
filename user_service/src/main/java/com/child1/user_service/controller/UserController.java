@@ -25,6 +25,23 @@ public class UserController {
         return ResponseEntity.ok(  userService.getUsers()  );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                userService.getUserById(id)
+        );
+    }
+
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponseDto> getUserByEmail(@PathVariable String email) {
+        System.out.println("Fetching user by email: " + email);
+        return ResponseEntity.ok(
+                userService.getUserByEmail(email)
+        );
+    }
+
     @PostMapping("/create")
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody RegisterRequest userResponseDto ) {
         return ResponseEntity.ok(userService.createUser(userResponseDto));
@@ -43,6 +60,9 @@ public class UserController {
                 userService.deleteUser(id)
         );
     }
+
+
+
 
 
 

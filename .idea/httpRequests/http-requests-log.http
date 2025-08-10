@@ -1,3 +1,102 @@
+GET http://localhost:8082/api/v1/activities/johssn.doe@example.com
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> f-5.txt
+
+###
+
+GET http://localhost:8082/api/v1/activities/john.doe@example.com
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> f-4.txt
+
+###
+
+GET http://localhost:8081/api/v1/users
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T110517.200.json
+
+###
+
+GET http://localhost:8081/api/v1/users
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T110338.500.json
+
+###
+
+GET http://localhost:8081/api/v1/users
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T110335.500.json
+
+###
+
+GET http://localhost:8082/api/v1/activities
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T110310.200.json
+
+###
+
+GET http://localhost:8081/api/v1/users/email/zaid@gmail.com
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> f-3.txt
+
+###
+
+GET http://localhost:8081/api/v1/users/email/zaid@gmail.com
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> f-2.txt
+
+###
+
+GET http://localhost:8081/api/v1/users/email/zaid@gmail.com
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> f-1.txt
+
+###
+
+GET http://localhost:8081/api/v1/users/email/zaid@gmail.com
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> f.txt
+
+###
+
+GET http://localhost:8081/api/v1/users
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-08-10T101030.200.json
+
+###
+
 GET http://localhost:8082/api/v1/activities
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
 Accept-Encoding: br, deflate, gzip, x-gzip

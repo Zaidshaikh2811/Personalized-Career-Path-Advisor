@@ -24,6 +24,12 @@ public class ActivityController {
         return   ResponseEntity.ok(activityService.getAllActivities());
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<Boolean> validateUserEmail(@PathVariable String email) {
+        System.out.println("Validating user email: " + email);
+        return ResponseEntity.ok(activityService.validateUserEmail(email));
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<ActivityResponseDto> createActivity(@Valid @RequestBody ActivityRequestDto activity) {

@@ -15,6 +15,7 @@ import java.util.List;
 public class ActivityService {
 
     private ActivityRepo activityRepo;
+    private final GetUser getUser;
 
     public List<ActivityResponseDto> getAllActivities() {
         List<Activity> activityList = activityRepo.findAll();
@@ -51,6 +52,9 @@ public class ActivityService {
     }
 
     public ActivityResponseDto updateActivity(Long id, ActivityRequestDto activity) {
+
+
+
         ActivityResponseDto response = new ActivityResponseDto();
         response.setActivityType(activity.getActivityType());
         response.setDuration(activity.getDuration());
@@ -70,5 +74,15 @@ public class ActivityService {
             throw new RuntimeException("Activity not found");
         }
         activityRepo.deleteById(id);
+    }
+
+
+    public boolean validateUserEmail(String email) {
+        try {
+            getUser.getUserByEmail(email);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

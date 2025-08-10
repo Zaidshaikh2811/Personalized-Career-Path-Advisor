@@ -46,5 +46,7 @@ public class User {
     private LocalDateTime updatedAt;
 
 
-
+    public User orElseThrow(Object emailNotFound) {
+        throw new RuntimeException("User not found with the provided email");
+    }
 }

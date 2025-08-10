@@ -28,6 +28,20 @@ services:
       - mongo_data:/data/db
     restart: unless-stopped
 
+  # Recommendation MongoDB Service
+  recommendation-mongo-db:
+    image: mongo:latest
+    container_name: recommendation-mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    ports:
+      - "27018:27017"
+    volumes:
+      - recommendation_mongo_data:/data/db
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   mongo_data:
+  recommendation_mongo_data:
