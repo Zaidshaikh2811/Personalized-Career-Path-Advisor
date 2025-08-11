@@ -1,6 +1,8 @@
 package com.child1.ai_service.service;
 
 
+import com.child1.ai_service.model.Recommendation;
+import com.child1.ai_service.repo.RecommendationRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,9 +35,7 @@ public class GeminiService {
                         })
                 }
         );
-        System.out.println("Requesting Gemini API with prompt: " + prompt);
-        System.out.println("Requesting Gemini API with URL: " + apiUrl + apiKey);
-        System.out.println("Payload: " + payload);
+
         String response = webClient.post()
                 .uri(apiUrl + "?key=" + apiKey)
                 .header("Content-Type", "application/json")
@@ -50,4 +50,7 @@ public class GeminiService {
     }
 
 
+    public void saveRecommendation(Recommendation recommendation) {
+
+    }
 }

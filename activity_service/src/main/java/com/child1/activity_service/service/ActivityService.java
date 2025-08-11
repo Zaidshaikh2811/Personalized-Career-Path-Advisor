@@ -40,6 +40,8 @@ public class ActivityService {
         return activityList.stream()
                 .map(activity -> {
                     ActivityResponseDto response = new ActivityResponseDto();
+                    response.setId(activity.getId());
+                    response.setUserId(activity.getUserId());
                     response.setActivityType(activity.getActivityType());
                     response.setDuration(activity.getDuration());
                     response.setCaloriesBurned(activity.getCaloriesBurned());
@@ -53,35 +55,31 @@ public class ActivityService {
     }
 
     public ActivityResponseDto createActivity(ActivityRequestDto activity) {
+        // Convert DTO to entity and save to DB
+        Activity entity = activity.toEntity();
+        Activity savedEntity = activityRepo.save(entity);
+
+        // Convert saved entity to response DTO (with generated id)
         ActivityResponseDto response = new ActivityResponseDto();
+        response.setId(savedEntity.getId());
+        response.setUserId(savedEntity.getUserId());
+        response.setActivityType(savedEntity.getActivityType());
+        response.setDuration(savedEntity.getDuration());
+        response.setCaloriesBurned(savedEntity.getCaloriesBurned());
+        response.setStartTime(savedEntity.getStartTime());
+        response.setAdditionalMetrics(savedEntity.getAdditionalMetrics());
 
+        System.out.println("Activity created: " + response);
 
-
-        response.setActivityType(activity.getActivityType());
-        response.setDuration(activity.getDuration());
-        response.setCaloriesBurned(activity.getCaloriesBurned());
-        response.setStartTime(activity.getStartTime());
-        response.setAdditionalMetrics(activity.getAdditionalMetrics());
-
-        activityRepo.save(response.toEntity());
-
-
-
-        try{
-            rabbitTemplate.convertAndSend(exchange, routingKey, response);
-            System.out.println("Activity sent to RabbitMQ: " + response);
-
-
-
+        try {
+            // Send the full saved entity (with id) to RabbitMQ
+            rabbitTemplate.convertAndSend(exchange, routingKey, savedEntity);
+            System.out.println("Activity sent to RabbitMQ: " + savedEntity);
         } catch (Exception e) {
             System.err.println("Failed to send activity to RabbitMQ: " + e.getMessage());
             throw new RuntimeException("Failed to send activity to RabbitMQ", e);
         }
-
-
-
         return response;
-
     }
 
     public ActivityResponseDto updateActivity(Long id, ActivityRequestDto activity) {

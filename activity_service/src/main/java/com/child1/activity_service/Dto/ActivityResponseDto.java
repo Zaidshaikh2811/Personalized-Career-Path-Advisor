@@ -14,6 +14,14 @@ import java.util.Map;
 @Data
 public class ActivityResponseDto {
 
+    @NotNull(message = "ID is required")
+    @Min(value = 1, message = "ID must be a positive integer")
+    private String id;
+
+    @NotNull(message = "User ID is required")
+    @Min(value = 1, message = "User ID must be a positive integer")
+    private String userId;
+
     @NotNull(message = "Duration is required")
     @Min(value = 1, message = "Duration must be at least 1 minute")
     private Integer duration;
@@ -33,6 +41,7 @@ public class ActivityResponseDto {
 
     public Activity toEntity() {
         return Activity.builder()
+                .userId(userId)
                 .activityType(activityType)
                 .duration(duration)
                 .caloriesBurned(caloriesBurned)
