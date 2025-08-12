@@ -21,6 +21,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/gateway/src/main/resources/application.yml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/gateway/src/main/resources/application.yml" />
+              <option name="originalContent" value="spring:&#10;  application:&#10;    name: api-gateway&#10;  cloud:&#10;    gateway:&#10;      routes:&#10;        - id: activity-service&#10;          uri: lb://activity-service&#10;          predicates:&#10;            - Path=/api/activity/**&#10;        - id: ai-service&#10;          uri: http://localhost:8083&#10;          predicates:&#10;            - Path=/api/ai/**&#10;        - id: user-service&#10;          uri: http://localhost:8081&#10;          predicates:&#10;            - Path=/api/user/**&#10;&#10;server:&#10;  port: 8080" />
+              <option name="updatedContent" value="spring:&#10;  application:&#10;    name: api-gateway&#10;  cloud:&#10;    gateway:&#10;      routes:&#10;        - id: activity-service&#10;          uri: lb://activity-service&#10;          predicates:&#10;            - Path=/api/activity/**&#10;        - id: ai-service&#10;          uri: lb://ai-service&#10;          predicates:&#10;            - Path=/api/ai/**&#10;        - id: user-service&#10;          uri: lb://user-service&#10;          predicates:&#10;            - Path=/api/user/**&#10;&#10;server:&#10;  port: 8080" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

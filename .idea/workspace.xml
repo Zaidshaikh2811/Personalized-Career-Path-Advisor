@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="update .gitignore to include resources/config directory">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/controller/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/controller/RecommendationController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,6 +71,7 @@
     "Spring Boot.ActivityServiceApplication.executor": "Run",
     "Spring Boot.AiServiceApplication.executor": "Run",
     "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.GatewayApplication.executor": "Run",
     "Spring Boot.ServerApplication.executor": "Run",
     "Spring Boot.UserServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
@@ -90,6 +98,7 @@
       <recent name="com.child1.user_service.Repo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zaids\OneDrive\Desktop\java_proect\config_server\src\main" />
       <recent name="C:\Users\zaids\OneDrive\Desktop\java_proect\config_server\src\main\resources\config" />
     </key>
   </component>
@@ -110,6 +119,7 @@
               <entry key="ActivityServiceApplication" value="STOPPED" />
               <entry key="AiServiceApplication" value="STOPPED" />
               <entry key="ConfigServerApplication" value="STOPPED" />
+              <entry key="GatewayApplication" value="STOPPED" />
               <entry key="ServerApplication" value="STOPPED" />
               <entry key="UserServiceApplication" value="STOPPED" />
             </map>
@@ -118,7 +128,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ActivityServiceApplication">
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -141,8 +151,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="eureka" />
+      <module name="server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.server.ServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -186,7 +203,7 @@
       <workItem from="1754892509664" duration="1210000" />
       <workItem from="1754896190763" duration="9344000" />
       <workItem from="1754909090631" duration="29000" />
-      <workItem from="1754966630373" duration="1605000" />
+      <workItem from="1754966630373" duration="3988000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -284,7 +301,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754968234748</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update .gitignore to include resources/config directory">
+      <option name="closed" value="true" />
+      <created>1754968403168</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1754968403168</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,6 +328,7 @@
     <MESSAGE value="refactor Activity and ActivityRequestDto to use String for userId; enhance validation in ActivityResponseDto; add Recommendation processing in ActivityMessListner" />
     <MESSAGE value="add config server module with Maven configuration, application properties, and initial test setup" />
     <MESSAGE value="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
+    <MESSAGE value="update .gitignore to include resources/config directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore to include resources/config directory" />
   </component>
 </project>
