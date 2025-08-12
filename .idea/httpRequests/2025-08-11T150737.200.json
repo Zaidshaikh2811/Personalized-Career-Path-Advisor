@@ -1,0 +1,24 @@
+[
+  {
+    "id": "6899b9bd6fd4161ff66db18a",
+    "activityId": null,
+    "userId": "123",
+    "activityType": "RUNNING",
+    "recommendationText": "Overall: This 45-minute run in Central Park covering 7.5km and burning 350 calories demonstrates a moderate level of fitness.  The distance covered suggests a decent pace, but more detailed metrics (like pace per kilometer or heart rate data) would allow for a more precise assessment.\nPace: Assuming a consistent pace, the runner completed approximately 1km every 6 minutes (7.5km / 45 minutes). This is a respectable pace for many, but the lack of specific pace data prevents a more accurate evaluation of consistency and effort level.\nHeart Rate: Without heart rate data, it's impossible to analyze the intensity of the run.  Heart rate data would indicate whether the run was primarily in aerobic or anaerobic zones and help optimize training.\nCalories Burned: 350 calories burned in 45 minutes is a reasonable estimate, though it can vary depending on factors like weight, age, and intensity.  It provides a general indication of energy expenditure.",
+    "improvements": [
+      "Pace Consistency: Try incorporating interval training to improve pace consistency. This involves alternating between high-intensity bursts and periods of rest or lower intensity.  Tracking your pace per kilometer with a GPS watch will help identify areas for improvement and monitor progress.",
+      "Heart Rate Monitoring: Invest in a heart rate monitor (chest strap or wrist-based) to track your heart rate during runs.  This will allow you to train within specific heart rate zones, optimizing your workout for fitness gains and injury prevention. Learning your maximum heart rate and target zones is crucial.",
+      "Distance Progression: Gradually increase your running distance over time to improve endurance.  A good rule of thumb is to increase your weekly mileage by no more than 10%."
+    ],
+    "suggestions": [
+      "Interval Training: Warm-up with 5 minutes of easy jogging. Then, alternate between 400m high-intensity sprints (80-90% of your maximum heart rate if monitored) and 400m recovery jogs (60-70% of your maximum heart rate). Repeat this cycle 4-6 times. Cool down with 5 minutes of easy jogging and stretching.",
+      "Long Slow Distance (LSD): Once a week, perform a longer run at a comfortable, conversational pace. This improves endurance and helps build a strong aerobic base. Start with a distance slightly longer than your current average run and gradually increase it over time."
+    ],
+    "safety": [
+      "Always warm up before running and cool down afterwards to prevent injuries.",
+      "Stay hydrated by drinking plenty of water before, during, and after your run, especially in warmer weather. Consider carrying water with you during runs longer than 30 minutes."
+    ],
+    "createdAt": "2025-08-11T15:07:01.445",
+    "updatedAt": null
+  }
+]

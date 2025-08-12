@@ -1,0 +1,41 @@
+[
+  {
+    "duration": null,
+    "caloriesBurned": null,
+    "startTime": null,
+    "activityType": null,
+    "additionalMetrics": null
+  },
+  {
+    "duration": null,
+    "caloriesBurned": null,
+    "startTime": null,
+    "activityType": null,
+    "additionalMetrics": null
+  },
+  {
+    "duration": null,
+    "caloriesBurned": null,
+    "startTime": null,
+    "activityType": null,
+    "additionalMetrics": null
+  },
+  {
+    "duration": 1,
+    "caloriesBurned": 1,
+    "startTime": "2024-12-12T10:00:00",
+    "activityType": "RUNNING",
+    "additionalMetrics": {
+      "distance": 5.3
+    }
+  },
+  {
+    "duration": 1,
+    "caloriesBurned": 1,
+    "startTime": "2024-12-12T10:00:00",
+    "activityType": "RUNNING",
+    "additionalMetrics": {
+      "distance": 5.3
+    }
+  }
+]

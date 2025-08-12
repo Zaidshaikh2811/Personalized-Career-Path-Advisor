@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Zaidshaikh2811&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Zaidshaikh2811/springboot_salon.git&quot;,
+    &quot;accountId&quot;: &quot;58664fa8-f74f-480e-b988-d23ef0c965ad&quot;
+  }
+}</component>
+  <component name="HttpClientEndpointsTabState">
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;dd07ce96a1f1ad2cc648a79b84df5bf71d36f625&quot; value=&quot;###&amp;#10;POST http://localhost:8082/api/v1/activities/create&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;duration&amp;quot;: 30,&amp;#10;  &amp;quot;caloriesBurned&amp;quot;: 250,&amp;#10;  &amp;quot;startTime&amp;quot;: &amp;quot;2025-08-10T09:00:00&amp;quot;,&amp;#10;  &amp;quot;activityType&amp;quot;: &amp;quot;RUNNING&amp;quot;,&amp;#10;  &amp;quot;additionalMetrics&amp;quot;: {&amp;#10;    &amp;quot;distance&amp;quot;: 5.2,&amp;#10;    &amp;quot;steps&amp;quot;: 7000,&amp;#10;    &amp;quot;location&amp;quot;: &amp;quot;Central Park&amp;quot;&amp;#10;  }&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;2b37d043f3ce180e4e5a858f5be99db19cbf0450&quot; value=&quot;###&amp;#10;GET http://localhost:8083/recommendations&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="312nN9mI0MPu1LSMJS6K4yh0HsV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ActivityServiceApplication.executor": "Run",
+    "Spring Boot.AiServiceApplication.executor": "Run",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.ServerApplication.executor": "Run",
+    "Spring Boot.UserServiceApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/zaids/OneDrive/Desktop/java_proect",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.child1.ai_service.model" />
+      <recent name="com.child1.activity_service.service" />
+      <recent name="com.child1.activity_service.Dto" />
+      <recent name="com.child1.activity_service.Model" />
+      <recent name="com.child1.user_service.Repo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zaids\OneDrive\Desktop\java_proect\config_server\src\main\resources\config" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="ActivityServiceApplication" value="STOPPED" />
+              <entry key="AiServiceApplication" value="STOPPED" />
+              <entry key="ConfigServerApplication" value="STOPPED" />
+              <entry key="ServerApplication" value="STOPPED" />
+              <entry key="UserServiceApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ActivityServiceApplication">
+    <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="activity_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.activity_service.ActivityServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AiServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ai_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.ai_service.AiServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="config_server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.config_server.ConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="eureka" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.server.ServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="user_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.user_service.UserServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="" />
+      <created>1754730996265</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754730996265</updated>
+      <workItem from="1754730996265" duration="71000" />
+      <workItem from="1754731122395" duration="6286000" />
+      <workItem from="1754740602019" duration="47000" />
+      <workItem from="1754740675057" duration="4413000" />
+      <workItem from="1754748366098" duration="69000" />
+      <workItem from="1754748479953" duration="164000" />
+      <workItem from="1754748682056" duration="1458000" />
+      <workItem from="1754797432576" duration="7607000" />
+      <workItem from="1754813658491" duration="16000" />
+      <workItem from="1754813693982" duration="11705000" />
+      <workItem from="1754828967249" duration="6237000" />
+      <workItem from="1754892509664" duration="1210000" />
+      <workItem from="1754896190763" duration="9344000" />
+      <workItem from="1754909090631" duration="29000" />
+      <workItem from="1754966630373" duration="1605000" />
+    </task>
+    <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
+      <option name="closed" value="true" />
+      <created>1754738936226</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754738936226</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add activity service with models, DTOs, and controller for activity management">
+      <option name="closed" value="true" />
+      <created>1754749938449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754749938449</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add .gitignore to exclude build artifacts and IDE-specific files">
+      <option name="closed" value="true" />
+      <created>1754749999813</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1754749999813</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add Maven wrapper and configuration files for project setup">
+      <option name="closed" value="true" />
+      <created>1754800666490</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1754800666490</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add user email validation and recommendation service with MongoDB integration">
+      <option name="closed" value="true" />
+      <created>1754815849068</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754815849068</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add recommendation service with controller, repository, and exception handling">
+      <option name="closed" value="true" />
+      <created>1754819426535</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1754819426535</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add RabbitMQ integration for activity service with configuration and messaging">
+      <option name="closed" value="true" />
+      <created>1754827055821</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1754827055821</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add activity model, activity type enum, and RabbitMQ configuration for message handling">
+      <option name="closed" value="true" />
+      <created>1754830054919</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1754830054919</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add ActivityAi and GeminiService for activity recommendation generation; enhance ActivityMessListner to process messages and generate recommendations">
+      <option name="closed" value="true" />
+      <created>1754835228396</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1754835228396</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor Activity and ActivityRequestDto to use String for userId; enhance validation in ActivityResponseDto; add Recommendation processing in ActivityMessListner">
+      <option name="closed" value="true" />
+      <created>1754907149568</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1754907149568</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add config server module with Maven configuration, application properties, and initial test setup">
+      <option name="closed" value="true" />
+      <created>1754968133639</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1754968133639</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add Maven wrapper and configuration files; update .gitignore to exclude additional resources">
+      <option name="closed" value="true" />
+      <created>1754968234748</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1754968234748</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add user service with registration, user management, and validation features" />
+    <MESSAGE value="add activity service with models, DTOs, and controller for activity management" />
+    <MESSAGE value="add .gitignore to exclude build artifacts and IDE-specific files" />
+    <MESSAGE value="add Maven wrapper and configuration files for project setup" />
+    <MESSAGE value="add user email validation and recommendation service with MongoDB integration" />
+    <MESSAGE value="add recommendation service with controller, repository, and exception handling" />
+    <MESSAGE value="add RabbitMQ integration for activity service with configuration and messaging" />
+    <MESSAGE value="add activity model, activity type enum, and RabbitMQ configuration for message handling" />
+    <MESSAGE value="add ActivityAi and GeminiService for activity recommendation generation; enhance ActivityMessListner to process messages and generate recommendations" />
+    <MESSAGE value="refactor Activity and ActivityRequestDto to use String for userId; enhance validation in ActivityResponseDto; add Recommendation processing in ActivityMessListner" />
+    <MESSAGE value="add config server module with Maven configuration, application properties, and initial test setup" />
+    <MESSAGE value="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
+  </component>
+</project>
