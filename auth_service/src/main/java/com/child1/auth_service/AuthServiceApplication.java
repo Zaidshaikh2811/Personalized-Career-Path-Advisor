@@ -1,14 +1,13 @@
-package com.child1.gateway;
+package com.child1.auth_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-
-public class GatewayApplication {
+public class AuthServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GatewayApplication.class, args);
+		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
 }

@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="update .gitignore to include resources/config directory">
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add gateway module with Maven configuration and initial setup; update application properties and refactor RecommendationController endpoint">
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/GatewayController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/controller/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/controller/RecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config_server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/GatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +52,7 @@
   }
 }</component>
   <component name="HttpClientEndpointsTabState">
-    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;dd07ce96a1f1ad2cc648a79b84df5bf71d36f625&quot; value=&quot;###&amp;#10;POST http://localhost:8082/api/v1/activities/create&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;duration&amp;quot;: 30,&amp;#10;  &amp;quot;caloriesBurned&amp;quot;: 250,&amp;#10;  &amp;quot;startTime&amp;quot;: &amp;quot;2025-08-10T09:00:00&amp;quot;,&amp;#10;  &amp;quot;activityType&amp;quot;: &amp;quot;RUNNING&amp;quot;,&amp;#10;  &amp;quot;additionalMetrics&amp;quot;: {&amp;#10;    &amp;quot;distance&amp;quot;: 5.2,&amp;#10;    &amp;quot;steps&amp;quot;: 7000,&amp;#10;    &amp;quot;location&amp;quot;: &amp;quot;Central Park&amp;quot;&amp;#10;  }&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;2b37d043f3ce180e4e5a858f5be99db19cbf0450&quot; value=&quot;###&amp;#10;GET http://localhost:8083/recommendations&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;ccd21500906a29d3072c43068aeb428b7ad21a01&quot; value=&quot;###&amp;#10;GET http://localhost:8085/api/v1/activities&quot; /&gt;&#10;  &lt;entry key=&quot;04a2ee1246b4a35cf8074f301c0449104b14650b&quot; value=&quot;###&amp;#10;GET http://localhost:8083/api/v1/recommendations&quot; /&gt;&#10;  &lt;entry key=&quot;cd55919f9a90e50508906e2f932d87de0534c8e8&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/users&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -70,13 +80,14 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.ActivityServiceApplication.executor": "Run",
     "Spring Boot.AiServiceApplication.executor": "Run",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
     "Spring Boot.ConfigServerApplication.executor": "Run",
     "Spring Boot.GatewayApplication.executor": "Run",
     "Spring Boot.ServerApplication.executor": "Run",
     "Spring Boot.UserServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/zaids/OneDrive/Desktop/java_proect",
+    "last_opened_file_path": "C:/Users/zaids/OneDrive/Desktop/java_proect/gateway/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,6 +107,9 @@
       <recent name="com.child1.activity_service.Dto" />
       <recent name="com.child1.activity_service.Model" />
       <recent name="com.child1.user_service.Repo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zaids\OneDrive\Desktop\java_proect\gateway\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\zaids\OneDrive\Desktop\java_proect\config_server\src\main" />
@@ -118,6 +132,7 @@
             <map>
               <entry key="ActivityServiceApplication" value="STOPPED" />
               <entry key="AiServiceApplication" value="STOPPED" />
+              <entry key="AuthServiceApplication" value="STOPPED" />
               <entry key="ConfigServerApplication" value="STOPPED" />
               <entry key="GatewayApplication" value="STOPPED" />
               <entry key="ServerApplication" value="STOPPED" />
@@ -128,7 +143,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+  <component name="RunManager" selected="Spring Boot.ActivityServiceApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -140,6 +155,13 @@
     <configuration name="AiServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ai_service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.ai_service.AiServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.child1.auth_service.AuthServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -204,6 +226,7 @@
       <workItem from="1754896190763" duration="9344000" />
       <workItem from="1754909090631" duration="29000" />
       <workItem from="1754966630373" duration="3988000" />
+      <workItem from="1754994388428" duration="13090000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
