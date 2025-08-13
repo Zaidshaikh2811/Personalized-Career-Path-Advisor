@@ -15,6 +15,19 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  auth-postgres-db:
+    image: postgres:16-alpine
+    container_name: auth-postgres-container
+    environment:
+      POSTGRES_USER: auth_admin
+      POSTGRES_PASSWORD: auth123
+      POSTGRES_DB: authdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth_postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
   # MongoDB Service
   mongo-db:
     image: mongo:latest
@@ -57,3 +70,4 @@ volumes:
   postgres_data:
   mongo_data:
   recommendation_mongo_data:
+  auth_postgres_data:

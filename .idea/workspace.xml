@@ -4,16 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add gateway module with Maven configuration and initial setup; update application properties and refactor RecommendationController endpoint">
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers">
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/TokenResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/repo/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/JwtService.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/controller/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/controller/RecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +51,7 @@
   }
 }</component>
   <component name="HttpClientEndpointsTabState">
-    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;ccd21500906a29d3072c43068aeb428b7ad21a01&quot; value=&quot;###&amp;#10;GET http://localhost:8085/api/v1/activities&quot; /&gt;&#10;  &lt;entry key=&quot;04a2ee1246b4a35cf8074f301c0449104b14650b&quot; value=&quot;###&amp;#10;GET http://localhost:8083/api/v1/recommendations&quot; /&gt;&#10;  &lt;entry key=&quot;cd55919f9a90e50508906e2f932d87de0534c8e8&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/users&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;ccd21500906a29d3072c43068aeb428b7ad21a01&quot; value=&quot;###&amp;#10;GET http://localhost:8085/api/v1/activities&quot; /&gt;&#10;  &lt;entry key=&quot;05054548fde075fa1b2ca9104a39511d208088aa&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/auth/validate-token/{{token}}&quot; /&gt;&#10;  &lt;entry key=&quot;04a2ee1246b4a35cf8074f301c0449104b14650b&quot; value=&quot;###&amp;#10;GET http://localhost:8083/api/v1/recommendations&quot; /&gt;&#10;  &lt;entry key=&quot;cd55919f9a90e50508906e2f932d87de0534c8e8&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/users&quot; /&gt;&#10;  &lt;entry key=&quot;bdce53cd4c2d280ffee7b9cab855d97bd2c67fcd&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/auth&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -221,7 +227,8 @@
       <workItem from="1754909090631" duration="29000" />
       <workItem from="1754966630373" duration="3988000" />
       <workItem from="1754994388428" duration="13090000" />
-      <workItem from="1755052604537" duration="4767000" />
+      <workItem from="1755052604537" duration="5307000" />
+      <workItem from="1755074637295" duration="5122000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -327,7 +334,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754968403168</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers">
+      <option name="closed" value="true" />
+      <created>1755057466382</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1755057466382</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,6 +362,7 @@
     <MESSAGE value="add config server module with Maven configuration, application properties, and initial test setup" />
     <MESSAGE value="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
     <MESSAGE value="update .gitignore to include resources/config directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore to include resources/config directory" />
+    <MESSAGE value="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers" />
   </component>
 </project>
