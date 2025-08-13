@@ -21,6 +21,7 @@ public class ActivityController {
 
     @GetMapping
     public ResponseEntity<List<ActivityResponseDto>> getActivities() {
+        System.out.println("Fetching all activities");
         return   ResponseEntity.ok(activityService.getAllActivities());
     }
 

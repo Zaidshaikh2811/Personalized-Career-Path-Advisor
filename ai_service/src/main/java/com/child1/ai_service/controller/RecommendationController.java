@@ -20,6 +20,7 @@ public class RecommendationController {
 
     @GetMapping
     public ResponseEntity<List<Recommendation>> getRecommendations() {
+        System.out.println("Fetching all recommendations");
         return ResponseEntity.ok(recommendationService.getAllRecommendations());
     }
 

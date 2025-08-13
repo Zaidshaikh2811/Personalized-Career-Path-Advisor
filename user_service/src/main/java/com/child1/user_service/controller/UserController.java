@@ -22,6 +22,7 @@ public class UserController {
 
     @GetMapping()
     public ResponseEntity<List<UserResponseDto>> getUsers() {
+        System.out.println("Fetching all users");
         return ResponseEntity.ok(  userService.getUsers()  );
     }
 

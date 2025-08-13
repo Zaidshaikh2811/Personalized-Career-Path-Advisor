@@ -9,6 +9,13 @@ import java.util.Map;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
+
+    @GetMapping
+    public ResponseEntity<String> healthCheck() {
+        System.out.println("Health check request received");
+        return ResponseEntity.ok("Auth Service is running");
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody String request) {
         System.out.println("Login request received: " + request);
@@ -19,8 +26,8 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("message", "Login successful"));
     }
 
-    @GetMapping("/validate")
-    public ResponseEntity<?> validateToken(@RequestParam String token) {
+    @GetMapping("/validate-token/{token}")
+    public ResponseEntity<?> validateToken(@PathVariable String token) {
         System.out.println("Token validation request received: " + token);
 //        boolean isValid = jwtService.validateToken(token);
 //        return ResponseEntity.ok(Map.of("valid", isValid));
