@@ -4,22 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers">
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/TokenResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/repo/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/JwtService.java" afterDir="false" />
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="remove commented line and clean up .gitignore for application.yml files">
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/AuthRegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/UserRole.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/start-all.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/repo/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/repo/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Dto/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Dto/UserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Dto/UserResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/model/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/model/UserRole.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,46 +72,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ActivityServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AiServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zaids/OneDrive/Desktop/java_proect/gateway/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ActivityServiceApplication.executor": "Run",
+    "Spring Boot.AiServiceApplication.executor": "Run",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.GatewayApplication.executor": "Run",
+    "Spring Boot.ServerApplication.executor": "Run",
+    "Spring Boot.UserServiceApplication.executor": "Run",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/zaids/OneDrive/Desktop/java_proect/gateway/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.child1.auth_service.model" />
       <recent name="com.child1.ai_service.model" />
       <recent name="com.child1.activity_service.service" />
       <recent name="com.child1.activity_service.Dto" />
       <recent name="com.child1.activity_service.Model" />
-      <recent name="com.child1.user_service.Repo" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\zaids\OneDrive\Desktop\java_proect\gateway\src\main\resources" />
@@ -143,7 +151,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+  <component name="RunManager" selected="Spring Boot.UserServiceApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -228,7 +236,10 @@
       <workItem from="1754966630373" duration="3988000" />
       <workItem from="1754994388428" duration="13090000" />
       <workItem from="1755052604537" duration="5307000" />
-      <workItem from="1755074637295" duration="5122000" />
+      <workItem from="1755074637295" duration="5538000" />
+      <workItem from="1755095609376" duration="924000" />
+      <workItem from="1755160131221" duration="1783000" />
+      <workItem from="1755165817969" duration="8214000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -342,7 +353,47 @@
       <option name="project" value="LOCAL" />
       <updated>1755057466382</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add authentication features: implement login and registration endpoints; add JWT service for token generation and validation; configure security settings">
+      <option name="closed" value="true" />
+      <created>1755080395542</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1755080395542</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add spring-cloud-starter-config dependency; update README with project structure, technologies, and service details">
+      <option name="closed" value="true" />
+      <created>1755160668766</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755160668766</updated>
+    </task>
+    <task id="LOCAL-00017" summary="add resources/config to .gitignore to exclude configuration files from version control">
+      <option name="closed" value="true" />
+      <created>1755161975752</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1755161975752</updated>
+    </task>
+    <task id="LOCAL-00018" summary="update .gitignore to exclude application.yml files from version control">
+      <option name="closed" value="true" />
+      <created>1755162102255</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1755162102255</updated>
+    </task>
+    <task id="LOCAL-00019" summary="remove commented line and clean up .gitignore for application.yml files">
+      <option name="closed" value="true" />
+      <created>1755162157872</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1755162157872</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,6 +414,11 @@
     <MESSAGE value="add Maven wrapper and configuration files; update .gitignore to exclude additional resources" />
     <MESSAGE value="update .gitignore to include resources/config directory" />
     <MESSAGE value="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="add health check endpoint to AuthController; implement AuthFilter for authorization; log activity fetching in controllers" />
+    <MESSAGE value="add authentication features: implement login and registration endpoints; add JWT service for token generation and validation; configure security settings" />
+    <MESSAGE value="add spring-cloud-starter-config dependency; update README with project structure, technologies, and service details" />
+    <MESSAGE value="add resources/config to .gitignore to exclude configuration files from version control" />
+    <MESSAGE value="update .gitignore to exclude application.yml files from version control" />
+    <MESSAGE value="remove commented line and clean up .gitignore for application.yml files" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove commented line and clean up .gitignore for application.yml files" />
   </component>
 </project>

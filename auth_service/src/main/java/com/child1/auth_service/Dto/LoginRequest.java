@@ -1,12 +1,18 @@
 package com.child1.auth_service.Dto;
 
+import com.child1.auth_service.model.UserRole;
 import lombok.*;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class LoginRequest {
-    private String username;
+
+    private String email;
     private String password;
+    private UserRole role = UserRole.USER;
+
+
+
 }

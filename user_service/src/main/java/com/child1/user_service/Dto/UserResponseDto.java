@@ -20,8 +20,6 @@ public class UserResponseDto {
 
     private String lastName;
 
-    private UserRole role = UserRole.USER;
-
 
 
 }

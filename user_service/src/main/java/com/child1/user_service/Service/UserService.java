@@ -18,38 +18,34 @@ public class UserService {
     private UserRepository userRepository;
 
 
+
     // Example method to create a user
-    public UserResponseDto createUser(RegisterRequest userResponseDto) {
-        if (userResponseDto == null) {
+    public UserResponseDto createUser(RegisterRequest request) {
+        if (request == null) {
             throw new IllegalArgumentException("User data must not be null");
         }
-        if (userResponseDto.getEmail() == null || userResponseDto.getEmail().isBlank()) {
+        if (request.getEmail() == null || request.getEmail().isBlank()) {
             throw new IllegalArgumentException("Email must not be null or blank");
         }
-        if (userResponseDto.getPassword() == null || userResponseDto.getPassword().isBlank()) {
-            throw new IllegalArgumentException("Password must not be null or blank");
-        }
-        if (userRepository.existsByEmail(userResponseDto.getEmail())) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
-        // Additional checks can be added here (e.g., password strength, name format, etc.)
 
         User user = new User();
-        user.setName(userResponseDto.getName());
-        user.setEmail(userResponseDto.getEmail());
-        user.setPassword(userResponseDto.getPassword());
-        user.setFirstName(userResponseDto.getFirstName());
-        user.setLastName(userResponseDto.getLastName());
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
 
-         User savedUser=userRepository.save(user);
+
+        User savedUser = userRepository.save(user);
 
         UserResponseDto responseDto = new UserResponseDto();
-
         responseDto.setName(savedUser.getName());
         responseDto.setEmail(savedUser.getEmail());
         responseDto.setFirstName(savedUser.getFirstName());
         responseDto.setLastName(savedUser.getLastName());
-        responseDto.setRole(savedUser.getRole());
+
 
         return responseDto;
 
@@ -67,15 +63,7 @@ public class UserService {
         // Update user fields as needed
         User updatedUser = userRepository.save(user);
 
-        UserResponseDto responseDto = new UserResponseDto();
-
-        responseDto.setName(updatedUser.getName());
-        responseDto.setEmail(updatedUser.getEmail());
-        responseDto.setFirstName(updatedUser.getFirstName());
-        responseDto.setLastName(updatedUser.getLastName());
-        responseDto.setRole(updatedUser.getRole());
-
-        return responseDto;
+        return getUserResponseDto(updatedUser);
 
     }
 
@@ -89,14 +77,7 @@ public class UserService {
         }
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(user);
-        UserResponseDto responseDto = new UserResponseDto();
-
-        responseDto.setName(user.getName());
-        responseDto.setEmail(user.getEmail());
-        responseDto.setFirstName(user.getFirstName());
-        responseDto.setLastName(user.getLastName());
-        responseDto.setRole(user.getRole());
-        return responseDto;
+        return getUserResponseDto(user);
     }
 
     // Example method to get all users
@@ -107,14 +88,7 @@ public class UserService {
             throw new RuntimeException("No users found");
         }
         return users.stream().map(user -> {
-            UserResponseDto responseDto = new UserResponseDto();
-
-            responseDto.setName(user.getName());
-            responseDto.setEmail(user.getEmail());
-            responseDto.setFirstName(user.getFirstName());
-            responseDto.setLastName(user.getLastName());
-            responseDto.setRole(user.getRole());
-            return responseDto;
+            return getUserResponseDto(user);
         }).toList();
     }
 
@@ -128,15 +102,7 @@ public class UserService {
         }
 
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        UserResponseDto responseDto = new UserResponseDto();
-
-        responseDto.setName(user.getName());
-        responseDto.setEmail(user.getEmail());
-        responseDto.setFirstName(user.getFirstName());
-        responseDto.setLastName(user.getLastName());
-        responseDto.setRole(user.getRole());
-
-        return responseDto;
+        return getUserResponseDto(user);
     }
 
     public UserResponseDto getUserByEmail(String email) {
@@ -147,12 +113,15 @@ public class UserService {
         if (user == null) {
             throw new RuntimeException("User not found with the provided email");
         }
+        return getUserResponseDto(user);
+    }
+
+    private UserResponseDto getUserResponseDto(User user) {
         UserResponseDto responseDto = new UserResponseDto();
         responseDto.setName(user.getName());
         responseDto.setEmail(user.getEmail());
         responseDto.setFirstName(user.getFirstName());
         responseDto.setLastName(user.getLastName());
-        responseDto.setRole(user.getRole());
         return responseDto;
     }
 }

@@ -45,11 +45,13 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody RegisterRequest userResponseDto ) {
+        System.out.println("Creating user with email: " + userResponseDto.getEmail());
         return ResponseEntity.ok(userService.createUser(userResponseDto));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @Valid @RequestBody RegisterRequest registerRequest) {
+        System.out.println("Updating user with ID: " + id);
         return ResponseEntity.ok(
                 userService.updateUser(id)
         );
