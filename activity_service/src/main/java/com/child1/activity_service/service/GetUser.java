@@ -18,7 +18,7 @@ public class GetUser {
 
         return webClient.
                 get()
-                .uri("/api/v1/users/email/{email}", email)
+                .uri("/api/v1/auth", email)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

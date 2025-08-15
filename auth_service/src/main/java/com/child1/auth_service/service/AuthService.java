@@ -9,6 +9,7 @@ import com.child1.auth_service.model.RegisterRequest;
 import com.child1.auth_service.model.User;
 import com.child1.auth_service.model.UserRole;
 import com.child1.auth_service.repo.UserRepository;
+import com.child1.commonsecurity.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,17 +20,19 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+
     private final WebClient.Builder webClientBuilder;
+    private final JwtService jwtService;
 
     public AuthService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                       JwtService jwtService,
+                          JwtService jwtService,
                        WebClient.Builder webClientBuilder) {
         this.userRepository = userRepository;
         this.webClientBuilder = webClientBuilder;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+
     }
 
     public TokenResponse login(LoginRequest request) {
@@ -39,8 +42,7 @@ public class AuthService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
-
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getId(), user.getEmail());
         return new TokenResponse(token);
     }
 
@@ -83,7 +85,7 @@ public class AuthService {
         return "User registered successfully";
     }
 
-    public boolean validateToken(String token) {
+    public   boolean validateToken(String token) {
         return jwtService.validateToken(token);
     }
 }

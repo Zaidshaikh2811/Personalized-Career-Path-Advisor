@@ -40,8 +40,8 @@ public class AuthController {
     }
 
 
-    @GetMapping("/validate-token/{token}")
-    public ResponseEntity<Map<String, Boolean>> validateToken(@PathVariable String token) {
+    @GetMapping("/validate")
+    public ResponseEntity<Map<String, Boolean>> validateToken(@RequestHeader("Authorization") String token) {
         System.out.println("Received token for validation: " + token);
         boolean isValid = authService.validateToken(token);
         System.out.println("Token validation result: " + isValid);

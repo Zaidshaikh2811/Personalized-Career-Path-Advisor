@@ -2,19 +2,29 @@ package com.child1.auth_service.service;
 
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Service
+//@Service
 public class JwtService {
 
-    private final String SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY1234567890abcdef";
-    private final long EXPIRATION = 1000 * 60 * 60; // 1 hour
+    private final String SECRET_KEY;
+    private final long EXPIRATION; // milliseconds
 
-    public String generateToken(String username) {
+    public JwtService(
+            @Value("${jwt.secret}") String secretKey,
+            @Value("${jwt.expiration}") long expiration) {
+        this.SECRET_KEY = secretKey;
+        this.EXPIRATION = expiration;
+    }
+
+
+    public String generateToken(Long userId,String username) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, SECRET_KEY)
@@ -29,5 +39,13 @@ public class JwtService {
         } catch (JwtException e) {
             return false;
         }
+    }
+
+    public Long extractUserId(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.get("userId", Long.class);
     }
 }

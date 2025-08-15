@@ -55,7 +55,7 @@ public class ActivityService {
     }
 
     public ActivityResponseDto createActivity(ActivityRequestDto activity) {
-        // Convert DTO to entity and save to DB
+
         Activity entity = activity.toEntity();
         Activity savedEntity = activityRepo.save(entity);
 

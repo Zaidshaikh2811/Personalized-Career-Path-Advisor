@@ -12,14 +12,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/start-all.sh">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/start-all.sh" />
-              <option name="updatedContent" value="#!/bin/bash&#10;&#10;# Start Docker Compose for DB, RabbitMQ, etc.&#10;echo &quot;Starting Docker Compose containers...&quot;&#10;docker-compose up -d&#10;&#10;# Wait for DB and RabbitMQ to be healthy (adjust as needed)&#10;echo &quot;Waiting for DB and RabbitMQ to be ready...&quot;&#10;sleep 15&#10;&#10;# Start Config Server&#10;cd config_server&#10;nohup ./mvnw spring-boot:run &gt; config_server.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;Config Server started.&quot;&#10;sleep 10&#10;&#10;# Start Eureka Server&#10;cd eureka&#10;nohup ./mvnw spring-boot:run &gt; eureka.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;Eureka Server started.&quot;&#10;sleep 10&#10;&#10;# Start Gateway&#10;cd gateway&#10;nohup ./mvnw spring-boot:run &gt; gateway.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;Gateway started.&quot;&#10;sleep 10&#10;&#10;# Start Activity Service&#10;cd activity_service&#10;nohup ./mvnw spring-boot:run &gt; activity_service.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;Activity Service started.&quot;&#10;sleep 5&#10;&#10;# Start AI Service&#10;cd ai_service&#10;nohup ./mvnw spring-boot:run &gt; ai_service.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;AI Service started.&quot;&#10;sleep 5&#10;&#10;# Start Auth Service&#10;cd auth_service&#10;nohup ./mvnw spring-boot:run &gt; auth_service.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;Auth Service started.&quot;&#10;sleep 5&#10;&#10;# Start User Service&#10;cd user_service&#10;nohup ./mvnw spring-boot:run &gt; user_service.log 2&gt;&amp;1 &amp;&#10;cd ..&#10;echo &quot;User Service started.&quot;&#10;sleep 5&#10;&#10;echo &quot;All microservices started. Check individual *.log files for output.&quot;&#10;" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
       </map>
     </option>
   </component>
