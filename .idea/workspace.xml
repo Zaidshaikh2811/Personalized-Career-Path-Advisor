@@ -4,20 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks">
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging">
+      <change afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/Error/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Error/GlobalExceptionHandler.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config_server/src/main/java/com/child1/config_server/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eureka/src/main/java/com/child1/server/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/Error/GlobalExceptionHandler.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start-all.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Error/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/ActivityServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/ActivityServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Model/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Model/Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/ActivityMessListner.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/ActivityMessListner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +150,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ConfigServerApplication">
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -252,7 +252,8 @@
       <workItem from="1755225356437" duration="2252000" />
       <workItem from="1755227642661" duration="3797000" />
       <workItem from="1755318105576" duration="2265000" />
-      <workItem from="1755339457583" duration="2076000" />
+      <workItem from="1755339457583" duration="2952000" />
+      <workItem from="1755348332011" duration="1108000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -430,7 +431,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755320368361</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging">
+      <option name="closed" value="true" />
+      <created>1755341815716</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1755341815716</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -459,6 +468,7 @@
     <MESSAGE value="refactor authentication: update login and registration to use email; add AuthRegisterRequest model; enhance user role management" />
     <MESSAGE value="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management" />
     <MESSAGE value="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks" />
+    <MESSAGE value="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging" />
   </component>
 </project>

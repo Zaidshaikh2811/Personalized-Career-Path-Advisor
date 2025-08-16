@@ -14,6 +14,9 @@ import reactor.core.publisher.Mono;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 
 import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
@@ -34,8 +37,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
+            return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Authorization token is required");
         }
 
         String token = authHeader.substring(7);
@@ -43,8 +45,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
         System.out.println("Extracted token: " + token);
         if (token.isEmpty()) {
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
+            return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Token is empty");
         }
         System.out.println("Validating token: " + token);
         return webClientBuilder.build()
@@ -59,16 +60,30 @@ public class AuthFilter implements GlobalFilter, Ordered {
                                     if (Boolean.TRUE.equals(isValid)) {
                                         return chain.filter(exchange);
                                     }
-                                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                                    return exchange.getResponse().setComplete();
+                                    return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid token");
                                 });
                     } else {
-                        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                        return exchange.getResponse().setComplete();
+                        return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Token validation failed");
                     }
                 });
     }
 
+    private Mono<Void> writeErrorResponse(ServerWebExchange exchange, HttpStatus status, String error, String message) {
+        exchange.getResponse().setStatusCode(status);
+        exchange.getResponse().getHeaders().set("Content-Type", "application/json");
+        Map<String, Object> errorResponse = Map.of(
+                "timestamp", LocalDateTime.now().toString(),
+                "status", status.value(),
+                "error", error,
+                "message", message
+        );
+        try {
+            byte[] bytes = new ObjectMapper().writeValueAsBytes(errorResponse);
+            return exchange.getResponse().writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(bytes)));
+        } catch (Exception e) {
+            return exchange.getResponse().setComplete();
+        }
+    }
 
     @Override
     public int getOrder() {
