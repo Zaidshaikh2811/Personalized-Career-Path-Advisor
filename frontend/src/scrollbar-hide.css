@@ -1,0 +1,18 @@
+/* Hide scrollbars globally */
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+/* Hide scrollbars for modals (Tailwind utility) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+

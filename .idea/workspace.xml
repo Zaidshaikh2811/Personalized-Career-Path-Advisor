@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging">
-      <change afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/Error/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Error/GlobalExceptionHandler.java" afterDir="false" />
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor activity service: enhance error handling, validate activity request fields, and improve logging">
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config_server/src/main/java/com/child1/config_server/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eureka/src/main/java/com/child1/server/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/Error/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/CorsGlobalConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Error/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +39,6 @@
     &quot;accountId&quot;: &quot;58664fa8-f74f-480e-b988-d23ef0c965ad&quot;
   }
 }</component>
-  <component name="HttpClientEndpointsTabState">
-    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;ccd21500906a29d3072c43068aeb428b7ad21a01&quot; value=&quot;###&amp;#10;GET http://localhost:8085/api/v1/activities&quot; /&gt;&#10;  &lt;entry key=&quot;05054548fde075fa1b2ca9104a39511d208088aa&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/auth/validate-token/{{token}}&quot; /&gt;&#10;  &lt;entry key=&quot;04a2ee1246b4a35cf8074f301c0449104b14650b&quot; value=&quot;###&amp;#10;GET http://localhost:8083/api/v1/recommendations&quot; /&gt;&#10;  &lt;entry key=&quot;cd55919f9a90e50508906e2f932d87de0534c8e8&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/users&quot; /&gt;&#10;  &lt;entry key=&quot;bdce53cd4c2d280ffee7b9cab855d97bd2c67fcd&quot; value=&quot;###&amp;#10;GET http://localhost:8080/api/v1/auth&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
-  </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -253,7 +241,9 @@
       <workItem from="1755227642661" duration="3797000" />
       <workItem from="1755318105576" duration="2265000" />
       <workItem from="1755339457583" duration="2952000" />
-      <workItem from="1755348332011" duration="1108000" />
+      <workItem from="1755348332011" duration="1245000" />
+      <workItem from="1755354537578" duration="4525000" />
+      <workItem from="1755362173957" duration="70000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -439,7 +429,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755341815716</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="refactor activity service: enhance error handling, validate activity request fields, and improve logging">
+      <option name="closed" value="true" />
+      <created>1755349531421</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1755349531421</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,6 +467,7 @@
     <MESSAGE value="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management" />
     <MESSAGE value="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks" />
     <MESSAGE value="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging" />
+    <MESSAGE value="refactor activity service: enhance error handling, validate activity request fields, and improve logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor activity service: enhance error handling, validate activity request fields, and improve logging" />
   </component>
 </project>

@@ -1,0 +1,39 @@
+# Ignore environment files
+.env
+
+# Ignore application configuration files
+application.yml
+
+# Ignore IDE and OS specific files
+*.iml
+.idea/
+*.log
+.DS_Store
+
+# Ignore build output
+/target/
+/build/
+
+# Ignore node_modules for frontend
+node_modules/
+
+# Ignore resources/config and resources/application.yml in all microservices
+**/resources/config/
+**/resources/application.yml
+
+# Ignore Maven wrapper files
+mvnw*
+
+# Ignore test output
+/test-classes/
+
+# Ignore generated sources
+/generated-sources/
+/generated-test-sources/
+
+# Ignore jar files
+*.jar
+
+# Ignore other sensitive files
+secrets.env
+
