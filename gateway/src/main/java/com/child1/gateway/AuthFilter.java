@@ -49,7 +49,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         System.out.println("Validating token: " + token);
         return webClientBuilder.build()
                 .get()
-                .uri("http://auth-service/api/v1/auth/validate-token")
+                .uri("http://auth-service/api/v1/auth/validate")
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .exchangeToMono(response -> {
                     if (response.statusCode().is2xxSuccessful()) {

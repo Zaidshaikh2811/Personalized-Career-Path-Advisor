@@ -5,6 +5,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,18 +15,25 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final String secretKey="asdasdasdasdasd";
-    private final long expiration=100000;
+    private final String secretKey;
+    private final long expiration;
 
-//    public JwtService(
-//            @Value("${jwt.secret}") String secretKey,
-//            @Value("${jwt.expiration}") long expiration) {
-//        System.out.println("Initializing); JwtService with secretKey: " + secretKey + " and expiration: " + expiration);
-//        this.secretKey = secretKey;
-//        this.expiration = expiration;
-//    }
+    public JwtService(
+            @Value("${jwt.secret}") String secretKey,
+            @Value("${jwt.expiration}") long expiration
+    ) {
+        System.out.println("Initializing");
+        this.secretKey = secretKey;
+        this.expiration = expiration;
+    }
 
     public String generateToken(Long userId, String username) {
+        System.out.println("Generating token for user: " + username);
+        if (userId == null || username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("User ID and username must not be null or empty");
+        }
+        System.out.println("secretKey"+secretKey);
+        System.out.println("expiration"+expiration);
         return Jwts.builder()
                 .setSubject(username)
                 .claim("userId", userId)
@@ -36,6 +45,13 @@ public class JwtService {
 
     public boolean validateToken(String token) {
         try {
+            System.out.println("Validating token: " + token);
+            if (token == null || token.isEmpty()) {
+                System.out.println("Token is null or empty");
+                return false;
+            }
+            System.out.println("Using secretKey: " + secretKey);
+            System.out.println("Using expiration: " + expiration);
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         } catch (JwtException e) {
@@ -49,5 +65,9 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
         return claims.get("userId", Long.class);
+    }
+    @PostConstruct
+    public void checkEnv() {
+        System.out.println("JWT_SECRET: " + System.getenv("JWT_SECRET"));
     }
 }

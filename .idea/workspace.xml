@@ -4,31 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor authentication: update login and registration to use email; add AuthRegisterRequest model; enhance user role management">
-      <change afterPath="$PROJECT_DIR$/common-security/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/src/main/java/com/child1/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/src/main/java/com/child1/CommonSecurityAutoConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/src/main/java/com/child1/commonsecurity/JwtService.java" afterDir="false" />
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management">
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-security/src/test/java/com/child1/AppTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/start-all.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/config/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/config/WebClientConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/GetUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/GetUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/AuthServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-security/src/main/java/com/child1/commonsecurity/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-security/src/main/java/com/child1/commonsecurity/JwtService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,19 +132,19 @@
             <map>
               <entry key="ActivityServiceApplication" value="STOPPED" />
               <entry key="AiServiceApplication" value="STOPPED" />
-              <entry key="AuthServiceApplication" value="FAILED" />
+              <entry key="AuthServiceApplication" value="STOPPED" />
               <entry key="CommonSecurityApplication" value="FAILED" />
               <entry key="ConfigServerApplication" value="STOPPED" />
               <entry key="GatewayApplication" value="STOPPED" />
               <entry key="ServerApplication" value="STOPPED" />
-              <entry key="UserServiceApplication" value="STOPPED" />
+              <entry key="UserServiceApplication" value="FAILED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -262,7 +244,8 @@
       <workItem from="1755221413876" duration="3304000" />
       <workItem from="1755224899980" duration="440000" />
       <workItem from="1755225356437" duration="2252000" />
-      <workItem from="1755227642661" duration="2705000" />
+      <workItem from="1755227642661" duration="3797000" />
+      <workItem from="1755318105576" duration="2217000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -424,7 +407,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755180331137</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management">
+      <option name="closed" value="true" />
+      <created>1755231261135</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1755231261135</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,6 +442,7 @@
     <MESSAGE value="update .gitignore to exclude application.yml files from version control" />
     <MESSAGE value="remove commented line and clean up .gitignore for application.yml files" />
     <MESSAGE value="refactor authentication: update login and registration to use email; add AuthRegisterRequest model; enhance user role management" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor authentication: update login and registration to use email; add AuthRegisterRequest model; enhance user role management" />
+    <MESSAGE value="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management" />
+    <option name="LAST_COMMIT_MESSAGE" value="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management" />
   </component>
 </project>

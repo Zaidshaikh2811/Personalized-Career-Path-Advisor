@@ -10,6 +10,7 @@ import com.child1.auth_service.model.User;
 import com.child1.auth_service.model.UserRole;
 import com.child1.auth_service.repo.UserRepository;
 import com.child1.commonsecurity.JwtService;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,4 +89,5 @@ public class AuthService {
     public   boolean validateToken(String token) {
         return jwtService.validateToken(token);
     }
+
 }
