@@ -5,6 +5,7 @@ import com.child1.activity_service.Dto.ActivityRequestDto;
 import com.child1.activity_service.Dto.ActivityResponseDto;
 import com.child1.activity_service.Model.Activity;
 import com.child1.activity_service.repo.ActivityRepo;
+import com.child1.commonsecurity.JwtService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,15 @@ public class ActivityService {
     private ActivityRepo activityRepo;
     private final GetUser getUser;
     private RabbitTemplate rabbitTemplate;
-    public ActivityService(ActivityRepo activityRepo, GetUser getUser, RabbitTemplate rabbitTemplate) {
+    private JwtService jwtService;
+
+
+
+    public ActivityService(ActivityRepo activityRepo, GetUser getUser, RabbitTemplate rabbitTemplate, JwtService jwtService) {
         this.activityRepo = activityRepo;
         this.rabbitTemplate = rabbitTemplate;
         this.getUser = getUser;
+        this.jwtService = jwtService;
     }
 
 
@@ -54,22 +60,47 @@ public class ActivityService {
 
     }
 
-    public ActivityResponseDto createActivity(ActivityRequestDto activity) {
+    public ActivityResponseDto createActivity(ActivityRequestDto activity, String authHeader) {
+
+        String token = authHeader.startsWith("Bearer ") ? authHeader.substring(7) : authHeader;
+
+        Long userId = jwtService.extractUserId(token);
+        if (userId == null) {
+            throw new RuntimeException("Invalid token");
+        }
+        if (!validateUserEmail(jwtService.extractUserId(token).toString())) {
+            throw new RuntimeException("Invalid user email");
+        }
 
         Activity entity = activity.toEntity();
+        entity.setUserId(userId);
         Activity savedEntity = activityRepo.save(entity);
 
-        // Convert saved entity to response DTO (with generated id)
         ActivityResponseDto response = new ActivityResponseDto();
         response.setId(savedEntity.getId());
-        response.setUserId(savedEntity.getUserId());
+        response.setUserId(
+            savedEntity.getUserId()
+        );
         response.setActivityType(savedEntity.getActivityType());
         response.setDuration(savedEntity.getDuration());
         response.setCaloriesBurned(savedEntity.getCaloriesBurned());
         response.setStartTime(savedEntity.getStartTime());
         response.setAdditionalMetrics(savedEntity.getAdditionalMetrics());
-
-        System.out.println("Activity created: " + response);
+//        Activity entity = activity.toEntity();
+//        Activity savedEntity = activityRepo.save(entity);
+//
+//
+//        // Convert saved entity to response DTO (with generated id)
+//        ActivityResponseDto response = new ActivityResponseDto();
+//        response.setId(savedEntity.getId());
+//        response.setUserId(savedEntity.getUserId());
+//        response.setActivityType(savedEntity.getActivityType());
+//        response.setDuration(savedEntity.getDuration());
+//        response.setCaloriesBurned(savedEntity.getCaloriesBurned());
+//        response.setStartTime(savedEntity.getStartTime());
+//        response.setAdditionalMetrics(savedEntity.getAdditionalMetrics());
+//
+//        System.out.println("Activity created: " + response);
 
         try {
             // Send the full saved entity (with id) to RabbitMQ

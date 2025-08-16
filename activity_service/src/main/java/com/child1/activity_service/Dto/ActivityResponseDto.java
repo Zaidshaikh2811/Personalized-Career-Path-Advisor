@@ -20,7 +20,7 @@ public class ActivityResponseDto {
 
     @NotNull(message = "User ID is required")
     @Min(value = 1, message = "User ID must be a positive integer")
-    private String userId;
+    private Long userId;
 
     @NotNull(message = "Duration is required")
     @Min(value = 1, message = "Duration must be at least 1 minute")

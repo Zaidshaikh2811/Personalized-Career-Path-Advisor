@@ -33,9 +33,10 @@ public class ActivityController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<ActivityResponseDto> createActivity(@Valid @RequestBody ActivityRequestDto activity) {
-        System.out.println("Creating activity: " + activity);
-        return   ResponseEntity.ok(activityService.createActivity(activity));
+    public ResponseEntity<ActivityResponseDto> createActivity(@Valid @RequestBody ActivityRequestDto activity ,
+                                                              @RequestHeader("Authorization") String token) {
+        System.out.println("Creating activity: " + activity + " with token: " + token);
+        return   ResponseEntity.ok(activityService.createActivity(activity, token));
     }
 
 

@@ -175,7 +175,7 @@ public class ActivityMessListner {
 
 
             Recommendation recommendation = new Recommendation();
-
+            System.out.println("Saving recommendation for activity ID: " + activity.getId());
             recommendation.setActivityId(activity.getId());
             recommendation.setUserId(activity.getUserId());
             recommendation.setActivityType(String.valueOf(activity.getActivityType()));

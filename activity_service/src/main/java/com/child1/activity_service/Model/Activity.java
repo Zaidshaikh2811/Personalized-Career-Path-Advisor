@@ -25,7 +25,7 @@ public class Activity {
     @Id
     private String id;
 
-    private String userId;
+    private Long userId;
 
     private ActivitType activityType;
     private Integer duration;

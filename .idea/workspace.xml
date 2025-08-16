@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management">
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks">
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/start-all.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-security/src/main/java/com/child1/commonsecurity/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-security/src/main/java/com/child1/commonsecurity/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/ActivityServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/ActivityServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Dto/ActivityResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Model/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/Model/Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/ActivityMessListner.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/ActivityMessListner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,14 +143,14 @@
               <entry key="ConfigServerApplication" value="STOPPED" />
               <entry key="GatewayApplication" value="STOPPED" />
               <entry key="ServerApplication" value="STOPPED" />
-              <entry key="UserServiceApplication" value="FAILED" />
+              <entry key="UserServiceApplication" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+  <component name="RunManager" selected="Spring Boot.ConfigServerApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -245,7 +251,8 @@
       <workItem from="1755224899980" duration="440000" />
       <workItem from="1755225356437" duration="2252000" />
       <workItem from="1755227642661" duration="3797000" />
-      <workItem from="1755318105576" duration="2217000" />
+      <workItem from="1755318105576" duration="2265000" />
+      <workItem from="1755339457583" duration="2076000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -415,7 +422,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755231261135</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks">
+      <option name="closed" value="true" />
+      <created>1755320368361</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1755320368361</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,6 +458,7 @@
     <MESSAGE value="remove commented line and clean up .gitignore for application.yml files" />
     <MESSAGE value="refactor authentication: update login and registration to use email; add AuthRegisterRequest model; enhance user role management" />
     <MESSAGE value="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management" />
-    <option name="LAST_COMMIT_MESSAGE" value="add common-security module: implement JWT service, update application configuration, and enhance .gitignore for better file management" />
+    <MESSAGE value="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks" />
   </component>
 </project>
