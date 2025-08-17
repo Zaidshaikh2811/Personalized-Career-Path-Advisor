@@ -6,7 +6,12 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class TokenResponse {
     private String token;
+    private String user;
+
+    public TokenResponse(String token, String user) {
+        this.token = token;
+        this.user = user;
+    }
 }

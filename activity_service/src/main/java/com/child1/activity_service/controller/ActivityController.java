@@ -6,9 +6,12 @@ import com.child1.activity_service.Dto.ActivityResponseDto;
 import com.child1.activity_service.service.ActivityService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,15 +23,91 @@ public class ActivityController {
 
 
     @GetMapping
-    public ResponseEntity<List<ActivityResponseDto>> getActivities() {
-        System.out.println("Fetching all activities");
-        return   ResponseEntity.ok(activityService.getAllActivities());
+    public ResponseEntity<Page<ActivityResponseDto>> getActivitiesPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "startTime") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortDirection) {
+
+        System.out.println("Fetching paginated activities - Page: " + page + ", Size: " + size);
+        return ResponseEntity.ok(activityService.getAllActivitiesPaginated(page, size, sortBy, sortDirection));
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<Boolean> validateUserEmail(@PathVariable String email) {
-        System.out.println("Validating user email: " + email);
-        return ResponseEntity.ok(activityService.validateUserEmail(email));
+//    @GetMapping
+//    public ResponseEntity<List<ActivityResponseDto>> getActivities() {
+//        System.out.println("Fetching all activities");
+//        return   ResponseEntity.ok(activityService.getAllActivities());
+//    }
+
+    @GetMapping("/my-activities")
+    public ResponseEntity<Page<ActivityResponseDto>> getMyActivities(
+            @RequestHeader("Authorization") String token,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "startTime") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortDirection) {
+
+        System.out.println("Fetching activities for authenticated user");
+        return ResponseEntity.ok(activityService.getActivitiesForAuthenticatedUser(token, page, size, sortBy, sortDirection));
+    }
+
+    @GetMapping("/my-activities/filtered")
+    public ResponseEntity<Page<ActivityResponseDto>> getMyActivitiesWithFilters(
+            @RequestHeader("Authorization") String token,
+            @RequestParam(required = false) String activityType,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+            @RequestParam(required = false) Integer minDuration,
+            @RequestParam(required = false) Integer maxDuration,
+            @RequestParam(required = false) Integer minCalories,
+            @RequestParam(required = false) Integer maxCalories,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "startTime") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortDirection) {
+
+        System.out.println("Fetching filtered activities for authenticated user");
+        return ResponseEntity.ok(activityService.getActivitiesWithFiltersForUser(
+                token, activityType, startDate, endDate, minDuration, maxDuration,
+                minCalories, maxCalories, page, size, sortBy, sortDirection));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ActivityResponseDto> getActivityById(
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String token) {
+
+        System.out.println("Fetching activity by id: " + id);
+        return ResponseEntity.ok(activityService.getActivityById(id, token));
+    }
+
+    // Get recent activities for authenticated user
+    @GetMapping("/recent")
+    public ResponseEntity<List<ActivityResponseDto>> getRecentActivities(
+            @RequestHeader("Authorization") String token,
+            @RequestParam(defaultValue = "5") int limit) {
+
+        System.out.println("Fetching recent activities, limit: " + limit);
+        return ResponseEntity.ok(activityService.getRecentActivities(token, limit));
+    }
+
+    @GetMapping("/top-calories")
+    public ResponseEntity<List<ActivityResponseDto>> getTopCalorieActivities(
+            @RequestHeader("Authorization") String token) {
+
+        System.out.println("Fetching top calorie activities");
+        return ResponseEntity.ok(activityService.getTopCalorieActivities(token));
+    }
+
+    // Get activity statistics for authenticated user
+    @GetMapping("/stats")
+    public ResponseEntity<ActivityService.ActivityStatsDto> getActivityStats(
+            @RequestHeader("Authorization") String token,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+
+        System.out.println("Fetching activity statistics");
+        return ResponseEntity.ok(activityService.getActivityStats(token, startDate, endDate));
     }
 
 
@@ -41,15 +120,44 @@ public class ActivityController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ActivityResponseDto> updateActivity(@PathVariable Long id,@Valid @RequestBody ActivityRequestDto activity) {
-        return ResponseEntity.ok(activityService.updateActivity(id, activity));
+    public ResponseEntity<ActivityResponseDto> updateActivity(@PathVariable Long id,@Valid @RequestBody ActivityRequestDto activity , @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(activityService.updateActivity(id, activity , token));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteActivity(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteActivity(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+        System.out.println("Deleting activity with id: " + id + " using token: " + token);
+        // Optionally, you can validate the token here if needed
 
-        activityService.deleteActivity(id);
+        activityService.deleteActivity(id, token);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/bulk/create")
+    public ResponseEntity<List<ActivityResponseDto>> createActivitiesBulk(
+            @Valid @RequestBody List<ActivityRequestDto> activities,
+            @RequestHeader("Authorization") String token) {
+
+        System.out.println("Creating bulk activities, count: " + activities.size());
+        List<ActivityResponseDto> responses = activities.stream()
+                .map(activity -> activityService.createActivity(activity, token))
+                .toList();
+        return ResponseEntity.ok(responses);
+    }
+
+    @DeleteMapping("/bulk/delete")
+    public ResponseEntity<Void> deleteActivitiesBulk(
+            @RequestBody List<Long> activityIds,
+            @RequestHeader("Authorization") String token) {
+
+        System.out.println("Deleting bulk activities, count: " + activityIds.size());
+        activityIds.forEach(id -> activityService.deleteActivity(id, token));
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Activity Service is running");
     }
 
 }

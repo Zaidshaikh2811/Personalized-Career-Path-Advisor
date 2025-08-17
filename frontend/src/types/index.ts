@@ -18,6 +18,7 @@ export interface Activity {
   caloriesBurned: number;
   startTime: string;
   additionalMetrics?: Record<string, any>;
+
 }
 
 export interface Recommendation {

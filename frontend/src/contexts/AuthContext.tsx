@@ -38,12 +38,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authAPI.login(email, password);
       
       setToken(response.token);
-      // setUser(response.user);
-      setUser("user1"); // Temporary fix, replace with actual user data from response
+      setUser(response.user);
+
 
       localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify("user1")); // Temporary fix, replace with actual user data from response
-      // localStorage.setItem('user', JSON.stringify(response.user));
+      // localStorage.setItem('user', JSON.stringify("user1")); // Temporary fix, replace with actual user data from response
+     localStorage.setItem('user', JSON.stringify(response.user));
     } catch (error) {
       const apiError = handleApiError(error);
       throw new Error(apiError.message);

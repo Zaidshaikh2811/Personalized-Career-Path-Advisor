@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor activity service: enhance error handling, validate activity request fields, and improve logging">
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add initial project setup: configure Vite with React and TypeScript, implement Tailwind CSS, and set up basic routing">
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/CorsGlobalConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/repo/ActivityRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/repo/ActivityRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/Dto/TokenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/contexts/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/contexts/AuthContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +93,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\zaids\\OneDrive\\Desktop\\java_proect\\frontend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -138,7 +147,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+  <component name="RunManager" selected="Spring Boot.ActivityServiceApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -243,7 +252,9 @@
       <workItem from="1755339457583" duration="2952000" />
       <workItem from="1755348332011" duration="1245000" />
       <workItem from="1755354537578" duration="4525000" />
-      <workItem from="1755362173957" duration="70000" />
+      <workItem from="1755362173957" duration="132000" />
+      <workItem from="1755367445197" duration="2222000" />
+      <workItem from="1755404438186" duration="5122000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -437,7 +448,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755349531421</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add initial project setup: configure Vite with React and TypeScript, implement Tailwind CSS, and set up basic routing">
+      <option name="closed" value="true" />
+      <created>1755362301436</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1755362301436</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,6 +487,7 @@
     <MESSAGE value="refactor JWT service: update token validation endpoint, enhance token generation logic, and improve environment variable checks" />
     <MESSAGE value="refactor activity service: change userId type to Long, enhance createActivity method with token validation, and improve logging" />
     <MESSAGE value="refactor activity service: enhance error handling, validate activity request fields, and improve logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor activity service: enhance error handling, validate activity request fields, and improve logging" />
+    <MESSAGE value="add initial project setup: configure Vite with React and TypeScript, implement Tailwind CSS, and set up basic routing" />
+    <option name="LAST_COMMIT_MESSAGE" value="add initial project setup: configure Vite with React and TypeScript, implement Tailwind CSS, and set up basic routing" />
   </component>
 </project>

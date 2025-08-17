@@ -65,8 +65,18 @@ export const userAPI = {
 };
 
 export const activityAPI = {
-  getActivities: async (): Promise<Activity[]> => {
-    const response: AxiosResponse<Activity[]> = await api.get('/api/v1/activities');
+  getActivities: async (
+      page: number,
+      size: number,
+      sortBy: string,
+      sortDirection: string,
+      filters?: { activityType?: string }
+  ): Promise<any> => {
+    let url = `/api/v1/activities?page=${page}&size=${size}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+    if (filters?.activityType) {
+      url += `&activityType=${filters.activityType}`;
+    }
+    const response = await api.get(url);
     return response.data;
   },
 

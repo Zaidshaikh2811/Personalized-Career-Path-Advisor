@@ -6,6 +6,13 @@ import { activityAPI, aiAPI, handleApiError } from '../services/api';
 import { Plus, Clock, Trash2, Brain, TrendingUp, Star } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
+const activityTypes = [
+  'RUNNING', 'WALKING', 'SWIMMING', 'WEIGHT_TRAINING', 'CYCLING', 'YOGA',
+  'HIIT', 'DANCE', 'BOXING', 'PILATES', 'AEROBICS', 'STRETCHING',
+  'MARTIAL_ARTS', 'ROCK_CLIMBING', 'HIKING', 'SKATING', 'SKIING',
+  'SNOWBOARDING', 'SURFING', 'GYMNASTICS', 'CROSS_TRAINING'
+];
+
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const { addNotification } = useNotification();
@@ -31,16 +38,29 @@ const Dashboard: React.FC = () => {
   const [selectedRecommendation, setSelectedRecommendation] = useState<Recommendation | null>(null);
   const [showRecommendationModal, setShowRecommendationModal] = useState(false);
 
+  // Pagination and sorting state
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(5);
+  const [sortBy, setSortBy] = useState('startTime');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [filterActivityType, setFilterActivityType] = useState('');
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
     loadActivities();
     loadRecommendations(); // Fetch all recommendations on mount
   }, []);
 
+  useEffect(() => {
+    loadActivities();
+  }, [page, size, sortBy, sortDirection, filterActivityType]);
+
   const loadActivities = async () => {
     try {
       setIsLoading(true);
-      const activitiesData = await activityAPI.getActivities();
-      setActivities(activitiesData);
+      const response = await activityAPI.getActivities(page, size, sortBy, sortDirection, { activityType: filterActivityType });
+      setActivities(response.content);
+      setTotalPages(response.totalPages);
     } catch (error) {
       const apiError = handleApiError(error);
       addNotification(apiError.message, 'error');
@@ -199,6 +219,49 @@ const Dashboard: React.FC = () => {
             </button>
           </div>
 
+          {/* Improved Filter, Sort, Pagination Controls */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-4 border border-slate-700 flex flex-wrap items-center gap-4">
+            <span className="font-semibold text-teal-400 mr-2 flex items-center">
+              <TrendingUp className="w-4 h-4 mr-1" /> Filter Activities
+            </span>
+            <select
+              value={filterActivityType}
+              onChange={e => setFilterActivityType(e.target.value)}
+              className="bg-slate-700 border border-teal-500 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            >
+              <option value="">All Types</option>
+              {activityTypes.map(type => (
+                <option key={type} value={type}>{type.replace(/_/g, ' ')}</option>
+              ))}
+            </select>
+            <button
+              onClick={() => setFilterActivityType('')}
+              className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-lg transition-colors"
+              disabled={!filterActivityType}
+            >
+              Clear Filter
+            </button>
+            {/* Sorting and Pagination Controls */}
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)} className="bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option value="startTime">Start Time</option>
+              <option value="duration">Duration</option>
+              {/* Add more sort options as needed */}
+            </select>
+            <select value={sortDirection} onChange={e => setSortDirection(e.target.value as 'asc' | 'desc')} className="bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+            <button disabled={page === 0} onClick={() => setPage(page - 1)} className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg disabled:opacity-50 transition-colors">
+              Previous
+            </button>
+            <span className="text-slate-300">
+              Page {page + 1} of {totalPages}
+            </span>
+            <button disabled={page + 1 >= totalPages} onClick={() => setPage(page + 1)} className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg disabled:opacity-50 transition-colors">
+              Next
+            </button>
+          </div>
+
           {/* Add Activity Form */}
           {showForm && (
             <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
@@ -253,16 +316,19 @@ const Dashboard: React.FC = () => {
                   <label htmlFor="activityType" className="block text-sm font-medium text-slate-300 mb-2">
                     Activity Type
                   </label>
-                  <input
+                  <select
                     id="activityType"
-                    type="text"
                     required
                     value={activityType}
                     onChange={(e) => setActivityType(e.target.value)}
-                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="Enter activity type"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                     disabled={isCreating}
-                  />
+                  >
+                    <option value="">Select activity type</option>
+                    {activityTypes.map(type => (
+                      <option key={type} value={type}>{type.replace(/_/g, ' ')}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label htmlFor="duration" className="block text-sm font-medium text-slate-300 mb-2">
