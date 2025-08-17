@@ -27,7 +27,7 @@ public class Recommendation {
     private String activityId;
 
     @NotBlank
-    private String userId;
+    private Long userId;
 
     @NotBlank
     private String activityType;

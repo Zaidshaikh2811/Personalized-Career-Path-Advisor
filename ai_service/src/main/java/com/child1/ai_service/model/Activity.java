@@ -25,7 +25,7 @@ public class Activity {
     private String id;
 
     @NotNull(message = "User ID is required")
-    private String userId;
+    private Long userId;
 
     @NotNull(message = "Activity type is required")
     private ActivitType activityType;

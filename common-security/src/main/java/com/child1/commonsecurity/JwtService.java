@@ -66,6 +66,16 @@ public class JwtService {
                 .getBody();
         return claims.get("userId", Long.class);
     }
+
+
+    public String extractUsername(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
+    }
+
     @PostConstruct
     public void checkEnv() {
         System.out.println("JWT_SECRET: " + System.getenv("JWT_SECRET"));

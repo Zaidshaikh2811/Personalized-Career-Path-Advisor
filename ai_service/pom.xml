@@ -89,6 +89,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.child1</groupId>  <!-- Must match groupId from common-security's pom.xml -->
+            <artifactId>common-security</artifactId>
+            <version>1.0.0</version> <!-- Version from common-security's pom.xml -->
+        </dependency>
     </dependencies>
 	<dependencyManagement>
 		<dependencies>

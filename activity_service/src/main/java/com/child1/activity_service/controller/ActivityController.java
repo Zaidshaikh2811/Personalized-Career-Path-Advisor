@@ -47,8 +47,9 @@ public class ActivityController {
             @RequestParam(defaultValue = "startTime") String sortBy,
             @RequestParam(defaultValue = "desc") String sortDirection) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Fetching activities for authenticated user");
-        return ResponseEntity.ok(activityService.getActivitiesForAuthenticatedUser(token, page, size, sortBy, sortDirection));
+        return ResponseEntity.ok(activityService.getActivitiesForAuthenticatedUser(jwt, page, size, sortBy, sortDirection));
     }
 
     @GetMapping("/my-activities/filtered")
@@ -66,9 +67,10 @@ public class ActivityController {
             @RequestParam(defaultValue = "startTime") String sortBy,
             @RequestParam(defaultValue = "desc") String sortDirection) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Fetching filtered activities for authenticated user");
         return ResponseEntity.ok(activityService.getActivitiesWithFiltersForUser(
-                token, activityType, startDate, endDate, minDuration, maxDuration,
+                jwt, activityType, startDate, endDate, minDuration, maxDuration,
                 minCalories, maxCalories, page, size, sortBy, sortDirection));
     }
 
@@ -77,8 +79,9 @@ public class ActivityController {
             @PathVariable Long id,
             @RequestHeader("Authorization") String token) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Fetching activity by id: " + id);
-        return ResponseEntity.ok(activityService.getActivityById(id, token));
+        return ResponseEntity.ok(activityService.getActivityById(id, jwt));
     }
 
     // Get recent activities for authenticated user
@@ -87,16 +90,18 @@ public class ActivityController {
             @RequestHeader("Authorization") String token,
             @RequestParam(defaultValue = "5") int limit) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Fetching recent activities, limit: " + limit);
-        return ResponseEntity.ok(activityService.getRecentActivities(token, limit));
+        return ResponseEntity.ok(activityService.getRecentActivities(jwt, limit));
     }
 
     @GetMapping("/top-calories")
     public ResponseEntity<List<ActivityResponseDto>> getTopCalorieActivities(
             @RequestHeader("Authorization") String token) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Fetching top calorie activities");
-        return ResponseEntity.ok(activityService.getTopCalorieActivities(token));
+        return ResponseEntity.ok(activityService.getTopCalorieActivities(jwt));
     }
 
     // Get activity statistics for authenticated user
@@ -106,30 +111,32 @@ public class ActivityController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Fetching activity statistics");
-        return ResponseEntity.ok(activityService.getActivityStats(token, startDate, endDate));
+        return ResponseEntity.ok(activityService.getActivityStats(jwt, startDate, endDate));
     }
 
 
     @PostMapping("/create")
     public ResponseEntity<ActivityResponseDto> createActivity(@Valid @RequestBody ActivityRequestDto activity ,
                                                               @RequestHeader("Authorization") String token) {
-        System.out.println("Creating activity: " + activity + " with token: " + token);
-        return   ResponseEntity.ok(activityService.createActivity(activity, token));
+        String jwt = extractJwtFromHeader(token);
+        System.out.println("Creating activity: " + activity + " with token: " + jwt);
+        return   ResponseEntity.ok(activityService.createActivity(activity, jwt));
     }
 
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ActivityResponseDto> updateActivity(@PathVariable Long id,@Valid @RequestBody ActivityRequestDto activity , @RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(activityService.updateActivity(id, activity , token));
+        String jwt = extractJwtFromHeader(token);
+        return ResponseEntity.ok(activityService.updateActivity(id, activity , jwt));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteActivity(@PathVariable Long id, @RequestHeader("Authorization") String token) {
-        System.out.println("Deleting activity with id: " + id + " using token: " + token);
-        // Optionally, you can validate the token here if needed
-
-        activityService.deleteActivity(id, token);
+        String jwt = extractJwtFromHeader(token);
+        System.out.println("Deleting activity with id: " + id + " using token: " + jwt);
+        activityService.deleteActivity(id, jwt);
         return ResponseEntity.noContent().build();
     }
     @PostMapping("/bulk/create")
@@ -137,9 +144,10 @@ public class ActivityController {
             @Valid @RequestBody List<ActivityRequestDto> activities,
             @RequestHeader("Authorization") String token) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Creating bulk activities, count: " + activities.size());
         List<ActivityResponseDto> responses = activities.stream()
-                .map(activity -> activityService.createActivity(activity, token))
+                .map(activity -> activityService.createActivity(activity, jwt))
                 .toList();
         return ResponseEntity.ok(responses);
     }
@@ -149,8 +157,9 @@ public class ActivityController {
             @RequestBody List<Long> activityIds,
             @RequestHeader("Authorization") String token) {
 
+        String jwt = extractJwtFromHeader(token);
         System.out.println("Deleting bulk activities, count: " + activityIds.size());
-        activityIds.forEach(id -> activityService.deleteActivity(id, token));
+        activityIds.forEach(id -> activityService.deleteActivity(id, jwt));
         return ResponseEntity.noContent().build();
     }
 
@@ -158,6 +167,13 @@ public class ActivityController {
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("Activity Service is running");
+    }
+
+    private String extractJwtFromHeader(String tokenHeader) {
+        if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
+            return tokenHeader.substring(7).trim();
+        }
+        return tokenHeader != null ? tokenHeader.trim() : null;
     }
 
 }

@@ -72,7 +72,7 @@ export const activityAPI = {
       sortDirection: string,
       filters?: { activityType?: string }
   ): Promise<any> => {
-    let url = `/api/v1/activities?page=${page}&size=${size}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+    let url = `/api/v1/activities/my-activities?page=${page}&size=${size}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
     if (filters?.activityType) {
       url += `&activityType=${filters.activityType}`;
     }

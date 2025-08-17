@@ -24,7 +24,7 @@ public class UserService {
         if (request == null) {
             throw new IllegalArgumentException("User data must not be null");
         }
-        if (request.getEmail() == null || request.getEmail().isBlank()) {
+        if (request.getEmail() == null || request.getEmail().isEmpty()) {
             throw new IllegalArgumentException("Email must not be null or blank");
         }
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -87,9 +87,10 @@ public class UserService {
         if (users == null || users.isEmpty()) {
             throw new RuntimeException("No users found");
         }
-        return users.stream().map(user -> {
-            return getUserResponseDto(user);
-        }).toList();
+        return
+users.stream()
+                .map(this::getUserResponseDto)
+                .toList();
     }
 
     public UserResponseDto getUserById(Long id) {
@@ -106,7 +107,7 @@ public class UserService {
     }
 
     public UserResponseDto getUserByEmail(String email) {
-        if (email == null || email.isBlank()) {
+        if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email must not be null or blank");
         }
         User user = userRepository.findByEmail(email);
