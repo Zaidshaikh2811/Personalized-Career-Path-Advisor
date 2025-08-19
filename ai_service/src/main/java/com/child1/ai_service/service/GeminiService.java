@@ -1,14 +1,10 @@
 package com.child1.ai_service.service;
 
 
-import com.child1.ai_service.model.Recommendation;
-import com.child1.ai_service.repo.RecommendationRepo;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -50,7 +46,4 @@ public class GeminiService {
     }
 
 
-    public void saveRecommendation(Recommendation recommendation) {
-
-    }
 }

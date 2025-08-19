@@ -15,7 +15,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 
 import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.nio.charset.StandardCharsets;
+
 import java.time.LocalDateTime;
 
 @Component
@@ -47,7 +47,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (token.isEmpty()) {
             return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Token is empty");
         }
-        System.out.println("Validating token: " + token);
+
         return webClientBuilder.build()
                 .get()
                 .uri("http://auth-service/api/v1/auth/validate")

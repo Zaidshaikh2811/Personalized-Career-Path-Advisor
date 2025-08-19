@@ -1,4 +1,4 @@
-# Child1 Fitness Platform
+# FitNest Fitness Platform
 
 A scalable microservices-based fitness tracking and AI recommendation platform built with Java (Spring Boot), React, RabbitMQ, Docker, and more.
 

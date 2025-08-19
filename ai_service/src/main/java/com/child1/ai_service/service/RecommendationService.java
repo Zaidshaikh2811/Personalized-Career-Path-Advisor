@@ -51,11 +51,6 @@ public class RecommendationService {
         return recommendationRepo.findByUserId(userId, pageable);
     }
 
-    @Transactional(readOnly = true)
-    public Page<Recommendation> getRecommendationsByActivityId(String activityId, Pageable pageable) {
-        validateStringId(activityId);
-        return recommendationRepo.findByActivityId(activityId, pageable);
-    }
 
     @Transactional(readOnly = true)
     public Page<Recommendation> getRecommendationsByUserIdAndActivityId(Long userId, String activityId, Pageable pageable) {

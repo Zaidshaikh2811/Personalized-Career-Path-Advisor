@@ -19,22 +19,11 @@ public interface ActivityRepo extends MongoRepository<Activity, Long> {
     List<Activity> findTop5ByUserIdOrderByStartTimeDesc(Long userId);
 
     List<Activity> findByUserIdOrderByStartTimeDesc(Long userId);
-    @Query("{ 'userId': ?0, 'activityType': ?1, 'startTime': { $gte: ?2, $lte: ?3 } }")
-    Page<Activity> findByUserIdAndActivityTypeAndDateRange(Long userId, String activityType, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
 
     Page<Activity> findByUserIdAndStartTimeBetween(Long userId, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
 
-    Page<Activity> findByUserIdAndActivityType(Long userId, String activityType, Pageable pageable);
-
     Page<Activity> findByUserId(Long userId, Pageable pageable);
 
-    Page<Activity> findByActivityType(String activityType, Pageable pageable);
-
-    Page<Activity> findByStartTimeBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
-
-    Page<Activity> findByDurationBetween(Integer minDuration, Integer maxDuration, Pageable pageable);
-
-    Page<Activity> findByCaloriesBurnedBetween(Integer minCalories, Integer maxCalories, Pageable pageable);
 
     List<Activity> findTop10ByUserIdOrderByCaloriesBurnedDesc(Long userId);
 
@@ -45,8 +34,7 @@ public interface ActivityRepo extends MongoRepository<Activity, Long> {
 
     Optional<Activity> findByIdAndUserId(String id, Long userId);
 
- 
-    boolean existsByUserIdAndId(String userId, String id);
+
 
     void deleteByUserIdAndId(Long userId, String id);
 }

@@ -4,41 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="add activity messaging: implement ActivityDeleteMessage and ActivityUpdateMessage classes, update RabbitMQ configuration, and modify ActivityMessListner for handling activity updates and deletions">
-      <change afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/messaging/ActivityDeleteMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/messaging/ActivityUpdateMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/messaging/ActivityDeleteMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/messaging/ActivityUpdateMessage.java" afterDir="false" />
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="clean up README: remove outdated license and contact sections, and streamline content">
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eureka/${project.build.directory}/classes/com/child1/server/GlobalExceptionHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eureka/${project.build.directory}/classes/com/child1/server/ServerApplication.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/controller/ActivityController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/repo/ActivityRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/repo/ActivityRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/GetUser.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/activity_service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/config/RabitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/config/RabitMqConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/repo/RecommendationRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/repo/RecommendationRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/ActivityMessListner.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/ActivityMessListner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/GeminiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/GeminiService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/RecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/RecommendationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/contexts/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/contexts/AuthContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Repo/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Repo/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +135,7 @@
             <map>
               <entry key="ActivityServiceApplication" value="STOPPED" />
               <entry key="AiServiceApplication" value="STOPPED" />
-              <entry key="AuthServiceApplication" value="FAILED" />
+              <entry key="AuthServiceApplication" value="STOPPED" />
               <entry key="CommonSecurityApplication" value="FAILED" />
               <entry key="ConfigServerApplication" value="STOPPED" />
               <entry key="GatewayApplication" value="STOPPED" />
@@ -278,7 +256,8 @@
       <workItem from="1755367445197" duration="2222000" />
       <workItem from="1755404438186" duration="10656000" />
       <workItem from="1755520947928" duration="3957000" />
-      <workItem from="1755579469886" duration="6526000" />
+      <workItem from="1755579469886" duration="6673000" />
+      <workItem from="1755593944034" duration="637000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -496,14 +475,29 @@
       <option name="project" value="LOCAL" />
       <updated>1755416152899</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="add activity messaging: implement ActivityDeleteMessage and ActivityUpdateMessage classes, update RabbitMQ configuration, and modify ActivityMessListner for handling activity updates and deletions">
+      <option name="closed" value="true" />
+      <created>1755588931856</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1755588931856</updated>
+    </task>
+    <task id="LOCAL-00029" summary="clean up README: remove outdated license and contact sections, and streamline content">
+      <option name="closed" value="true" />
+      <created>1755589024105</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1755589024105</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add Maven wrapper and configuration files for project setup" />
     <MESSAGE value="add user email validation and recommendation service with MongoDB integration" />
     <MESSAGE value="add recommendation service with controller, repository, and exception handling" />
     <MESSAGE value="add RabbitMQ integration for activity service with configuration and messaging" />
@@ -528,6 +522,7 @@
     <MESSAGE value="add pagination and filtering to activity retrieval endpoints: implement paginated fetching of activities, add filtering options for user activities, and enhance activity statistics retrieval" />
     <MESSAGE value="refactor activity and recommendation services: change userId type to Long, enhance JWT extraction, and improve activity and recommendation retrieval methods" />
     <MESSAGE value="add activity messaging: implement ActivityDeleteMessage and ActivityUpdateMessage classes, update RabbitMQ configuration, and modify ActivityMessListner for handling activity updates and deletions" />
-    <option name="LAST_COMMIT_MESSAGE" value="add activity messaging: implement ActivityDeleteMessage and ActivityUpdateMessage classes, update RabbitMQ configuration, and modify ActivityMessListner for handling activity updates and deletions" />
+    <MESSAGE value="clean up README: remove outdated license and contact sections, and streamline content" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up README: remove outdated license and contact sections, and streamline content" />
   </component>
 </project>
