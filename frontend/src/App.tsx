@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { useNotification } from './hooks/useNotification';
 import { NotificationContainer } from './components/Notification';
 import Layout from './components/Layout';
@@ -17,7 +17,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
 const AppContent: React.FC = () => {
-  const { notifications, addNotification, removeNotification } = useNotification();
+  const { notifications, removeNotification } = useNotification();
 
   return (
     <>

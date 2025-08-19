@@ -1,5 +1,6 @@
 package com.child1.gateway;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,11 @@ import java.time.LocalDateTime;
 public class AuthFilter implements GlobalFilter, Ordered {
 
     private final WebClient.Builder webClientBuilder;
+
+    @Value("${common.internal-secret}")
+    private String internalSecret;  // loaded from env variable
+
+
 
     public AuthFilter(WebClient.Builder webClientBuilder) {
         this.webClientBuilder = webClientBuilder;
@@ -48,6 +54,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
             return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Token is empty");
         }
 
+        System.out.println("Internal secret: " + internalSecret);
         return webClientBuilder.build()
                 .get()
                 .uri("http://auth-service/api/v1/auth/validate")
@@ -58,7 +65,11 @@ public class AuthFilter implements GlobalFilter, Ordered {
                                 .flatMap(body -> {
                                     Boolean isValid = (Boolean) body.get("valid");
                                     if (Boolean.TRUE.equals(isValid)) {
-                                        return chain.filter(exchange);
+                                        ServerWebExchange mutatedExchange = exchange.mutate()
+                                                .request(r -> r.headers(headers ->
+                                                        headers.add("X-Internal-Auth", internalSecret)))
+                                                .build();
+                                        return chain.filter(mutatedExchange);
                                     }
                                     return writeErrorResponse(exchange, HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid token");
                                 });

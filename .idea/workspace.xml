@@ -4,19 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="clean up README: remove outdated license and contact sections, and streamline content">
+    <list default="true" id="ebcd0390-0921-4888-9aff-7ed84830da8c" name="Changes" comment="refactor activity and recommendation repositories: remove unused query methods and clean up code">
+      <change afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/GatewayAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/service/InternalAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/GatewayAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/InternalAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/GatewayAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_service/src/main/java/com/child1/auth_service/service/InternalAuthFilter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/common-security/src/main/resources/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/GatewayAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Service/InternalAuthFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/repo/ActivityRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/java/com/child1/activity_service/repo/ActivityRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activity_service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/activity_service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/repo/RecommendationRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/repo/RecommendationRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/GeminiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/GeminiService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/RecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/java/com/child1/ai_service/service/RecommendationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/ai_service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/child1/gateway/AuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Repo/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user_service/src/main/java/com/child1/user_service/Repo/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +151,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ActivityServiceApplication">
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
     <configuration name="ActivityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="activity_service" />
@@ -257,7 +261,9 @@
       <workItem from="1755404438186" duration="10656000" />
       <workItem from="1755520947928" duration="3957000" />
       <workItem from="1755579469886" duration="6673000" />
-      <workItem from="1755593944034" duration="637000" />
+      <workItem from="1755593944034" duration="4678000" />
+      <workItem from="1755602325089" duration="983000" />
+      <workItem from="1755614292492" duration="1051000" />
     </task>
     <task id="LOCAL-00001" summary="add user service with registration, user management, and validation features">
       <option name="closed" value="true" />
@@ -491,14 +497,21 @@
       <option name="project" value="LOCAL" />
       <updated>1755589024105</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="refactor activity and recommendation repositories: remove unused query methods and clean up code">
+      <option name="closed" value="true" />
+      <created>1755594629331</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1755594629331</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add user email validation and recommendation service with MongoDB integration" />
     <MESSAGE value="add recommendation service with controller, repository, and exception handling" />
     <MESSAGE value="add RabbitMQ integration for activity service with configuration and messaging" />
     <MESSAGE value="add activity model, activity type enum, and RabbitMQ configuration for message handling" />
@@ -523,6 +536,7 @@
     <MESSAGE value="refactor activity and recommendation services: change userId type to Long, enhance JWT extraction, and improve activity and recommendation retrieval methods" />
     <MESSAGE value="add activity messaging: implement ActivityDeleteMessage and ActivityUpdateMessage classes, update RabbitMQ configuration, and modify ActivityMessListner for handling activity updates and deletions" />
     <MESSAGE value="clean up README: remove outdated license and contact sections, and streamline content" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up README: remove outdated license and contact sections, and streamline content" />
+    <MESSAGE value="refactor activity and recommendation repositories: remove unused query methods and clean up code" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor activity and recommendation repositories: remove unused query methods and clean up code" />
   </component>
 </project>
