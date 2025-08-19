@@ -4,6 +4,8 @@ package com.child1.ai_service.service;
 import com.child1.ai_service.model.Activity;
 import com.child1.ai_service.model.Recommendation;
 import com.child1.ai_service.repo.RecommendationRepo;
+import com.child1.ai_service.messaging.ActivityUpdateMessage;
+import com.child1.ai_service.messaging.ActivityDeleteMessage;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -39,6 +42,61 @@ public class ActivityMessListner {
             log.error("Error processing activity message: ", e);
         }
     }
+
+    @RabbitListener(queues = "activity-update-queue")
+    public void receiveActivityUpdate(ActivityUpdateMessage updateMessage) {
+        if (updateMessage == null || updateMessage.getActivity() == null) {
+            log.error("Update message or activity is null");
+            return;
+        }
+        try {
+            log.info("Processing activity update: {}", updateMessage.getActivityId());
+
+            // Delete existing recommendation if it exists
+            Optional<Recommendation> existingRecommendation =
+                    recommendationRepo.findByActivityIdAndUserId(updateMessage.getActivityId(), updateMessage.getActivity().getUserId());
+
+            if (existingRecommendation.isPresent()) {
+                recommendationRepo.delete(existingRecommendation.get());
+                log.info("Deleted existing recommendation for updated activity: {}", updateMessage.getActivityId());
+            }
+
+            // Generate new recommendation for updated activity
+            String prompt = createPromptForActivity(updateMessage.getActivity());
+            String response = geminiService.getResponse(prompt);
+            processResponse(updateMessage.getActivity(), response);
+
+        } catch (Exception e) {
+            log.error("Error processing activity update message: ", e);
+        }
+    }
+
+    // Listen for activity deletions
+    @RabbitListener(queues = "activity-delete-queue")
+    public void receiveActivityDelete(ActivityDeleteMessage deleteMessage) {
+        if (deleteMessage == null) {
+            log.error("Delete message is null");
+            return;
+        }
+        try {
+            log.info("Processing activity deletion: {}", deleteMessage.getActivityId());
+
+            // Find and delete associated recommendation
+            Optional<Recommendation> recommendation =
+                    recommendationRepo.findByActivityIdAndUserId(deleteMessage.getActivityId(), deleteMessage.getUserId());
+
+            if (recommendation.isPresent()) {
+                recommendationRepo.delete(recommendation.get());
+                log.info("Deleted recommendation for deleted activity: {}", deleteMessage.getActivityId());
+            } else {
+                log.warn("No recommendation found for deleted activity: {}", deleteMessage.getActivityId());
+            }
+
+        } catch (Exception e) {
+            log.error("Error processing activity delete message: ", e);
+        }
+    }
+
 
     private String createPromptForActivity(Activity activity) {
         return String.format("""

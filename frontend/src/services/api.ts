@@ -42,11 +42,14 @@ export const authAPI = {
     return response.data;
   },
 
-  register: async (username: string, email: string, password: string): Promise<{ token: string; user: User }> => {
+  register: async (  email: string, password: string, name: string, firstName: string, lastName: string): Promise<{ token: string; user: User }> => {
     const response: AxiosResponse<{ token: string; user: User }> = await api.post('/api/v1/auth/register', {
-      username,
+
       email,
       password,
+      name,
+      firstName,
+      lastName,
     });
     return response.data;
   },
@@ -86,7 +89,7 @@ export const activityAPI = {
   },
 
   deleteActivity: async (id: string): Promise<void> => {
-    await api.delete(`/api/v1/activities/${id}`);
+    await api.delete(`/api/v1/activities/delete/${id}`);
   },
 };
 
@@ -98,8 +101,13 @@ export const aiAPI = {
     return response.data;
   },
 
-  getAllRecommendations: async (): Promise<Recommendation[]> => {
-    const response: AxiosResponse<Recommendation[]> = await api.get('/api/v1/recommendations');
+  getAllRecommendations: async (
+      page: number,
+      size: number,
+      sortBy: string,
+      sortDir: string,
+  ): Promise<Recommendation[]> => {
+    const response: AxiosResponse<Recommendation[]> = await api.get(`/api/v1/recommendations?page=${page}&size=${size}&sortBy=${sortBy}&sortDirection=${sortDir}`);
     return response.data;
   },
 };

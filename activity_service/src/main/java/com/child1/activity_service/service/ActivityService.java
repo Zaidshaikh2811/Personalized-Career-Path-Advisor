@@ -12,7 +12,8 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.dao.DataAccessException;
-
+import com.child1.activity_service.messaging.ActivityUpdateMessage;
+import com.child1.activity_service.messaging.ActivityDeleteMessage;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,16 +23,17 @@ public class ActivityService {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ActivityService.class);
 
     private final ActivityRepo activityRepo;
-    private final GetUser getUser;
+
     private final RabbitTemplate rabbitTemplate;
     private final JwtService jwtService;
 
 
-    public ActivityService(ActivityRepo activityRepo, GetUser getUser, RabbitTemplate rabbitTemplate, JwtService jwtService) {
+    public ActivityService(ActivityRepo activityRepo, RabbitTemplate rabbitTemplate, JwtService jwtService) {
         this.activityRepo = activityRepo;
         this.rabbitTemplate = rabbitTemplate;
-        this.getUser = getUser;
+
         this.jwtService = jwtService;
+
     }
 
 
@@ -39,31 +41,12 @@ public class ActivityService {
     private String exchange;
     @Value("${rabbitmq.routing.key}")
     private String routingKey;
+    @Value("${rabbitmq.update.routing.key}")
+    private String updateRoutingKey;
+    @Value("${rabbitmq.delete.routing.key}")
+    private String deleteRoutingKey;
 
 
-    public List<ActivityResponseDto> getAllActivities() {
-        try {
-            List<Activity> activityList = activityRepo.findAll();
-            if (activityList.isEmpty()) {
-                throw new IllegalStateException("No activities found");
-            }
-            return activityList.stream()
-                    .map(activity -> {
-                        ActivityResponseDto response = new ActivityResponseDto();
-                        response.setId(activity.getId());
-                        response.setUserId(activity.getUserId());
-                        response.setActivityType(activity.getActivityType());
-                        response.setDuration(activity.getDuration());
-                        response.setCaloriesBurned(activity.getCaloriesBurned());
-                        response.setStartTime(activity.getStartTime());
-                        response.setAdditionalMetrics(activity.getAdditionalMetrics());
-                        return response;
-                    }).toList();
-        } catch (DataAccessException e) {
-            logger.error("Database error while fetching activities", e);
-            throw new RuntimeException("Database error while fetching activities", e);
-        }
-    }
 
     public ActivityResponseDto createActivity(ActivityRequestDto activity, String authHeader) {
         if (activity == null) {
@@ -83,8 +66,8 @@ public class ActivityService {
         if (userId == null) {
             throw new RuntimeException("Invalid token: userId missing");
         }
-        if (!validateUserEmail(userId.toString())) {
-            throw new RuntimeException("Invalid user email");
+        if (activity.getUserId() != null && !activity.getUserId().equals(userId)) {
+            throw new IllegalArgumentException("User ID in request does not match authenticated user");
         }
         // Validate required fields in activity
         if (activity.getActivityType() == null) {
@@ -131,33 +114,33 @@ public class ActivityService {
         return response;
     }
 
-    public ActivityResponseDto updateActivity(Long id, ActivityRequestDto activity , String authHeader) {
-        if (id == null || id <= 0) {
-            throw new IllegalArgumentException("Invalid activity id");
-        }
-        if (activity == null) {
-            throw new IllegalArgumentException("Activity request cannot be null");
-        }
-
+    public ActivityResponseDto updateActivity(String id, ActivityRequestDto activity , String authHeader) {
         Long userId = jwtService.extractUserId(authHeader);
-
         Optional<Activity> existingActivityOpt = activityRepo.findByIdAndUserId(id, userId);
         if (existingActivityOpt.isEmpty()) {
             throw new RuntimeException("Activity not found or access denied");
         }
-
         Activity existingActivity = existingActivityOpt.get();
         updateActivityFields(existingActivity, activity);
-
         try {
             activityRepo.save(existingActivity);
         } catch (DataAccessException e) {
             logger.error("Database error while updating activity", e);
             throw new RuntimeException("Database error while updating activity", e);
         }
-
+        try {
+            ActivityUpdateMessage updateMessage = new ActivityUpdateMessage();
+            updateMessage.setActivityId(id);
+            updateMessage.setActivity(existingActivity);
+            updateMessage.setAction("UPDATE");
+            rabbitTemplate.convertAndSend(exchange, updateRoutingKey, updateMessage);
+            logger.info("Activity update sent to RabbitMQ: {}", id);
+        } catch (Exception e) {
+            logger.error("Failed to send activity update to RabbitMQ", e);
+        }
         return mapToResponseDto(existingActivity);
     }
+
     private void updateActivityFields(Activity existingActivity, ActivityRequestDto activity) {
         if (activity.getActivityType() != null && !activity.getActivityType().toString().trim().isEmpty()) {
             existingActivity.setActivityType(activity.getActivityType());
@@ -176,38 +159,32 @@ public class ActivityService {
         }
     }
 
-    public void deleteActivity(Long id , String authHeader) {
+    public void deleteActivity(String id , String authHeader) {
         Long userId = jwtService.extractUserId(authHeader);
-        if (id == null || id <= 0) {
-            throw new IllegalArgumentException("Invalid activity id");
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("Activity id cannot be null or empty");
         }
-        if (!activityRepo.existsById(id)) {
-            throw new RuntimeException("Activity not found");
+        if (userId == null) {
+            throw new RuntimeException("Invalid token: userId missing");
         }
-        if (!activityRepo.existsByUserIdAndId(userId, id)) {
-            throw new RuntimeException("Activity not found or access denied");
-        }
-
         try {
             activityRepo.deleteByUserIdAndId(userId, id);
+            ActivityDeleteMessage deleteMessage = new ActivityDeleteMessage();
+            deleteMessage.setActivityId(id);
+            deleteMessage.setUserId(userId);
+            deleteMessage.setAction("DELETE");
+            rabbitTemplate.convertAndSend(exchange, deleteRoutingKey, deleteMessage);
+            logger.info("Activity deletion message sent to RabbitMQ: {}", id);
+
         } catch (DataAccessException e) {
             logger.error("Database error while deleting activity", e);
             throw new RuntimeException("Database error while deleting activity", e);
         }
     }
 
-    public boolean validateUserEmail(String email) {
-        try {
-            getUser.getUserByEmail(email);
-            return true;
-        } catch (Exception e) {
-            logger.warn("User email validation failed: {}", email);
-            return false;
-        }
-    }
+    public ActivityResponseDto getActivityById(String id, String authHeader) {
 
-    public ActivityResponseDto getActivityById(Long id, String authHeader) {
-        if (id == null || id <= 0) {
+        if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("Invalid activity id");
         }
 
@@ -248,54 +225,10 @@ public class ActivityService {
         }
     }
 
-    public Page<ActivityResponseDto> getActivitiesWithFilters(Long userId, String activityType, LocalDateTime startDate,
-                                                              LocalDateTime endDate, Integer minDuration, Integer maxDuration,
-                                                              Integer minCalories, Integer maxCalories, int page, int size,
-                                                              String sortBy, String sortDirection) {
-try{
-        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
-
-        Page<Activity> activityPage;
-
-        // Apply filters based on provided parameters
-        if (userId != null && activityType != null && startDate != null && endDate != null) {
-            activityPage = activityRepo.findByUserIdAndActivityTypeAndDateRange(userId, activityType, startDate, endDate, pageable);
-        } else if (userId != null && startDate != null && endDate != null) {
-            activityPage = activityRepo.findByUserIdAndStartTimeBetween(userId, startDate, endDate, pageable);
-        } else if (userId != null && activityType != null) {
-            activityPage = activityRepo.findByUserIdAndActivityType(userId, activityType, pageable);
-        } else if (userId != null) {
-            activityPage = activityRepo.findByUserId(userId, pageable);
-        } else if (activityType != null) {
-            activityPage = activityRepo.findByActivityType(activityType, pageable);
-        } else if (startDate != null && endDate != null) {
-            activityPage = activityRepo.findByStartTimeBetween(startDate, endDate, pageable);
-        } else if (minDuration != null && maxDuration != null) {
-            activityPage = activityRepo.findByDurationBetween(minDuration, maxDuration, pageable);
-        } else if (minCalories != null && maxCalories != null) {
-            activityPage = activityRepo.findByCaloriesBurnedBetween(minCalories, maxCalories, pageable);
-        } else {
-            activityPage = activityRepo.findAll(pageable);
-        }
-
-        return activityPage.map(this::mapToResponseDto);
-    } catch(
-    DataAccessException e)
-
-    {
-        logger.error("Database error while fetching filtered activities", e);
-        throw new RuntimeException("Database error while fetching filtered activities", e);
-    }
-}
-
-
-
-
     public Page<ActivityResponseDto> getActivitiesByUser(Long userId, int page, int size, String sortBy, String sortDirection) {
         try {
-            if (userId == null || userId <= 0) {
-                throw new IllegalArgumentException("Invalid user ID");
+            if (userId == null) {
+                throw new IllegalArgumentException("User ID cannot be null");
             }
             Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
             Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
@@ -387,7 +320,6 @@ try{
     }
 
     public Page<ActivityResponseDto> getActivitiesWithFiltersForUser(String token, String activityType, LocalDateTime startDate, LocalDateTime endDate, Integer minDuration, Integer maxDuration, Integer minCalories, Integer maxCalories, int page, int size, String sortBy, String sortDirection) {
-
         Long userId = jwtService.extractUserId(token);
         if (userId == null) {
             throw new RuntimeException("Invalid token: userId missing");
@@ -415,14 +347,14 @@ try{
                 // For complex filtering, get all results and filter in memory
                 // This is less efficient but works for smaller datasets
                 List<Activity> filteredActivities = activityPage.getContent().stream()
-                        .filter(activity -> activityType == null || activity.getActivityType().equals(activityType))
-                        .filter(activity -> startDate == null || !activity.getStartTime().isBefore(startDate))
-                        .filter(activity -> endDate == null || !activity.getStartTime().isAfter(endDate))
-                        .filter(activity -> minDuration == null || activity.getDuration() >= minDuration)
-                        .filter(activity -> maxDuration == null || activity.getDuration() <= maxDuration)
-                        .filter(activity -> minCalories == null || activity.getCaloriesBurned() >= minCalories)
-                        .filter(activity -> maxCalories == null || activity.getCaloriesBurned() <= maxCalories)
-                        .toList();
+                    .filter(activity -> activityType == null || activity.getActivityType().toString().equalsIgnoreCase(activityType) )
+                    .filter(activity -> startDate == null || !activity.getStartTime().isBefore(startDate))
+                    .filter(activity -> endDate == null || !activity.getStartTime().isAfter(endDate))
+                    .filter(activity -> minDuration == null || activity.getDuration() >= minDuration)
+                    .filter(activity -> maxDuration == null || activity.getDuration() <= maxDuration)
+                    .filter(activity -> minCalories == null || activity.getCaloriesBurned() >= minCalories)
+                    .filter(activity -> maxCalories == null || activity.getCaloriesBurned() <= maxCalories)
+                    .toList();
 
                 // Create a new Page with filtered results (simplified approach)
                 return new PageImpl<>(

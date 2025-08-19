@@ -1,44 +1,55 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { useNotification } from '../hooks/useNotification';
+import { toast } from 'react-toastify';
 import { Activity } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const Register: React.FC = () => {
-  const [username, setUsername] = useState('');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
   const { register } = useAuth();
   const navigate = useNavigate();
-  const { addNotification } = useNotification();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!name.trim()) {
+      toast.error('Name is required');
+      return;
+    }
+    if (!firstName.trim()) {
+      toast.error('First name is required');
+      return;
+    }
+    if (!lastName.trim()) {
+      toast.error('Last name is required');
+      return;
+    }
     if (password !== confirmPassword) {
-      addNotification('Passwords do not match', 'error');
+      toast.error('Passwords do not match');
       return;
     }
-
     if (password.length < 6) {
-      addNotification('Password must be at least 6 characters long', 'error');
+      toast.error('Password must be at least 6 characters long');
       return;
     }
-
     setIsLoading(true);
-
     try {
-      await register(username, email, password);
-      addNotification('Account created successfully! Welcome to ActivityTracker.', 'success');
+        console.log('Registering user:', { email, password, name, firstName, lastName });
+      await register(  email, password, name, firstName, lastName);
+      toast.success('Account created successfully! Welcome to ActivityTracker.');
       navigate('/dashboard');
     } catch (error) {
-      addNotification(
-        error instanceof Error ? error.message : 'Registration failed. Please try again.',
-        'error'
+      toast.error(
+        error instanceof Error ? error.message : 'Registration failed. Please try again.'
       );
     } finally {
       setIsLoading(false);
@@ -58,21 +69,7 @@ const Register: React.FC = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-300 mb-2">
-                Username
-              </label>
-              <input
-                id="username"
-                type="text"
-                required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                placeholder="Choose a username"
-                disabled={isLoading}
-              />
-            </div>
+
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
@@ -121,6 +118,52 @@ const Register: React.FC = () => {
                 placeholder="Confirm your password"
                 disabled={isLoading}
                 minLength={6}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                placeholder="Enter your full name"
+                disabled={isLoading}
+              />
+            </div>
+            <div>
+              <label htmlFor="firstName" className="block text-sm font-medium text-slate-300 mb-2">
+                First Name
+              </label>
+              <input
+                id="firstName"
+                type="text"
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                placeholder="Enter your first name"
+                disabled={isLoading}
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-2">
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                type="text"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                placeholder="Enter your last name"
+                disabled={isLoading}
               />
             </div>
 

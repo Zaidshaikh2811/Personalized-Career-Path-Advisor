@@ -6,6 +6,8 @@ import { NotificationContainer } from './components/Notification';
 import Layout from './components/Layout';
 import PrivateRoute from './components/PrivateRoute';
 import './scrollbar-hide.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Pages
 import Landing from './pages/Landing';
@@ -19,6 +21,7 @@ const AppContent: React.FC = () => {
 
   return (
     <>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop closeOnClick pauseOnFocusLoss draggable pauseOnHover />
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Landing />} />

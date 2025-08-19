@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { useNotification } from '../hooks/useNotification';
+import { toast } from 'react-toastify';
 import { Activity } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -13,7 +13,6 @@ const Login: React.FC = () => {
   const { login, user, token } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const { addNotification } = useNotification();
 
   // Redirect if already logged in
   React.useEffect(() => {
@@ -30,13 +29,12 @@ const Login: React.FC = () => {
 
     try {
       await login(email, password);
-        console.log('Login successful');
-      addNotification('Welcome back! Successfully logged in.', 'success');
+      console.log('Login successful');
+      toast.success('Welcome back! Successfully logged in.');
       navigate(from, { replace: true });
     } catch (error) {
-      addNotification(
-        error instanceof Error ? error.message : 'Login failed. Please try again.',
-        'error'
+      toast.error(
+        error instanceof Error ? error.message : 'Login failed. Please try again.'
       );
     } finally {
       setIsLoading(false);

@@ -5,6 +5,7 @@ import { Activity, Recommendation } from '../types';
 import { activityAPI, aiAPI, handleApiError } from '../services/api';
 import { Plus, Clock, Trash2, Brain, TrendingUp, Star } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { toast } from 'react-toastify';
 
 const activityTypes = [
   'RUNNING', 'WALKING', 'SWIMMING', 'WEIGHT_TRAINING', 'CYCLING', 'YOGA',
@@ -46,50 +47,86 @@ const Dashboard: React.FC = () => {
   const [filterActivityType, setFilterActivityType] = useState('');
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    loadActivities();
-    loadRecommendations(); // Fetch all recommendations on mount
-  }, []);
+  // Recommendation pagination and sorting state
+  const [recommendationPage, setRecommendationPage] = useState(0);
+  const [recommendationSize, setRecommendationSize] = useState(5);
+  const [recommendationSortBy, setRecommendationSortBy] = useState('createdAt');
+  const [recommendationSortDirection, setRecommendationSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [recommendationTotalPages, setRecommendationTotalPages] = useState(1);
 
   useEffect(() => {
-    loadActivities();
+    let isActive = true;
+    const fetchActivities = async () => {
+      setIsLoading(true);
+      try {
+        const response = await activityAPI.getActivities(page, size, sortBy, sortDirection, { activityType: filterActivityType });
+        if (isActive) {
+          setActivities(response.content);
+          setTotalPages(response.totalPages);
+        }
+      } catch (error) {
+        if (isActive) {
+          const apiError = handleApiError(error);
+          toast.error(apiError.message);
+        }
+      } finally {
+        if (isActive) setIsLoading(false);
+      }
+    };
+    fetchActivities();
+    return () => { isActive = false; };
   }, [page, size, sortBy, sortDirection, filterActivityType]);
 
-  const loadActivities = async () => {
-    try {
-      setIsLoading(true);
-      const response = await activityAPI.getActivities(page, size, sortBy, sortDirection, { activityType: filterActivityType });
-      setActivities(response.content);
-      setTotalPages(response.totalPages);
-    } catch (error) {
-      const apiError = handleApiError(error);
-      addNotification(apiError.message, 'error');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  useEffect(() => {
+    let isActive = true;
+    const fetchRecommendations = async () => {
+      setIsLoadingRecommendations(true);
+      try {
+        const recs = await aiAPI.getAllRecommendations(
+          recommendationPage,
+          recommendationSize,
+          recommendationSortBy,
+          recommendationSortDirection
+        );
+        if (isActive) {
+          setRecommendations(recs.content);
+          setRecommendationTotalPages(recs.totalPages);
+          toast.info('AI recommendations updated!');
+        }
+      } catch (error) {
+        if (isActive) {
+          const apiError = handleApiError(error);
+          toast.error(`Recommendations: ${apiError.message}`);
+        }
+      } finally {
+        if (isActive) setIsLoadingRecommendations(false);
+      }
+    };
+    fetchRecommendations();
+    return () => { isActive = false; };
+  }, [recommendationPage, recommendationSize, recommendationSortBy, recommendationSortDirection]);
 
   const createActivity = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!title.trim()) {
-      addNotification('Please enter a title for your activity', 'error');
+      toast.error('Please enter a title for your activity');
       return;
     }
     if (!activityType) {
-      addNotification('Please select an activity type', 'error');
+      toast.error('Please select an activity type');
       return;
     }
     if (!duration || duration < 1) {
-      addNotification('Duration must be at least 1 minute', 'error');
+      toast.error('Duration must be at least 1 minute');
       return;
     }
     if (caloriesBurned < 0) {
-      addNotification('Calories burned must be non-negative', 'error');
+      toast.error('Calories burned must be non-negative');
       return;
     }
     if (!startTime) {
-      addNotification('Please select a start time', 'error');
+      toast.error('Please select a start time');
       return;
     }
     let metricsObj = undefined;
@@ -97,7 +134,7 @@ const Dashboard: React.FC = () => {
       try {
         metricsObj = JSON.parse(additionalMetrics);
       } catch {
-        addNotification('Additional metrics must be valid JSON', 'error');
+        toast.error('Additional metrics must be valid JSON');
         return;
       }
     }
@@ -123,12 +160,12 @@ const Dashboard: React.FC = () => {
       setStartTime('');
       setAdditionalMetrics('');
       setShowForm(false);
-      addNotification('Activity created successfully!', 'success');
+      toast.success('Activity created successfully!');
 
       loadRecommendations(newActivity.id);
     } catch (error) {
       const apiError = handleApiError(error);
-      addNotification(apiError.message, 'error');
+      toast.error(apiError.message);
     } finally {
       setIsCreating(false);
     }
@@ -136,26 +173,13 @@ const Dashboard: React.FC = () => {
 
   const deleteActivity = async (id: string) => {
     try {
+
       await activityAPI.deleteActivity(id);
       setActivities(prev => prev.filter(activity => activity.id !== id));
-      addNotification('Activity deleted successfully', 'success');
+      toast.success('Activity deleted successfully');
     } catch (error) {
       const apiError = handleApiError(error);
-      addNotification(apiError.message, 'error');
-    }
-  };
-
-  const loadRecommendations = async () => {
-    try {
-      setIsLoadingRecommendations(true);
-      const recs = await aiAPI.getAllRecommendations();
-      setRecommendations(recs);
-      addNotification('AI recommendations updated!', 'info');
-    } catch (error) {
-      const apiError = handleApiError(error);
-      addNotification(`Recommendations: ${apiError.message}`, 'error');
-    } finally {
-      setIsLoadingRecommendations(false);
+      toast.error(apiError.message);
     }
   };
 
@@ -488,6 +512,27 @@ const Dashboard: React.FC = () => {
                 {isLoadingRecommendations ? 'Loading...' : 'Refresh'}
               </button>
             )}
+          </div>
+
+          {/* Recommendation Pagination Controls */}
+          <div className="flex items-center justify-between mb-2">
+            <button
+              onClick={() => setRecommendationPage(recommendationPage - 1)}
+              disabled={recommendationPage === 0 || isLoadingRecommendations}
+              className="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded-lg disabled:opacity-50 transition-colors"
+            >
+              Previous
+            </button>
+            <span className="text-slate-300">
+              Page {recommendationPage + 1} of {recommendationTotalPages}
+            </span>
+            <button
+              onClick={() => setRecommendationPage(recommendationPage + 1)}
+              disabled={recommendationPage + 1 >= recommendationTotalPages || isLoadingRecommendations}
+              className="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded-lg disabled:opacity-50 transition-colors"
+            >
+              Next
+            </button>
           </div>
 
           <div className="bg-slate-800 rounded-lg border border-slate-700">

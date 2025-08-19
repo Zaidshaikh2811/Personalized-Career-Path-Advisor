@@ -33,11 +33,7 @@ public class ActivityController {
         return ResponseEntity.ok(activityService.getAllActivitiesPaginated(page, size, sortBy, sortDirection));
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<ActivityResponseDto>> getActivities() {
-//        System.out.println("Fetching all activities");
-//        return   ResponseEntity.ok(activityService.getAllActivities());
-//    }
+
 
     @GetMapping("/my-activities")
     public ResponseEntity<Page<ActivityResponseDto>> getMyActivities(
@@ -76,7 +72,7 @@ public class ActivityController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ActivityResponseDto> getActivityById(
-            @PathVariable Long id,
+            @PathVariable String id,
             @RequestHeader("Authorization") String token) {
 
         String jwt = extractJwtFromHeader(token);
@@ -127,13 +123,13 @@ public class ActivityController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ActivityResponseDto> updateActivity(@PathVariable Long id,@Valid @RequestBody ActivityRequestDto activity , @RequestHeader("Authorization") String token) {
+    public ResponseEntity<ActivityResponseDto> updateActivity(@PathVariable String id, @Valid @RequestBody ActivityRequestDto activity, @RequestHeader("Authorization") String token) {
         String jwt = extractJwtFromHeader(token);
-        return ResponseEntity.ok(activityService.updateActivity(id, activity , jwt));
+        return ResponseEntity.ok(activityService.updateActivity(id, activity, jwt));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteActivity(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<Void> deleteActivity(@PathVariable String id, @RequestHeader("Authorization") String token) {
         String jwt = extractJwtFromHeader(token);
         System.out.println("Deleting activity with id: " + id + " using token: " + jwt);
         activityService.deleteActivity(id, jwt);
@@ -143,7 +139,6 @@ public class ActivityController {
     public ResponseEntity<List<ActivityResponseDto>> createActivitiesBulk(
             @Valid @RequestBody List<ActivityRequestDto> activities,
             @RequestHeader("Authorization") String token) {
-
         String jwt = extractJwtFromHeader(token);
         System.out.println("Creating bulk activities, count: " + activities.size());
         List<ActivityResponseDto> responses = activities.stream()
@@ -154,9 +149,8 @@ public class ActivityController {
 
     @DeleteMapping("/bulk/delete")
     public ResponseEntity<Void> deleteActivitiesBulk(
-            @RequestBody List<Long> activityIds,
+            @RequestBody List<String> activityIds,
             @RequestHeader("Authorization") String token) {
-
         String jwt = extractJwtFromHeader(token);
         System.out.println("Deleting bulk activities, count: " + activityIds.size());
         activityIds.forEach(id -> activityService.deleteActivity(id, jwt));

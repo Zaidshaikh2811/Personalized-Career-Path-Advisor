@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNotification } from '../hooks/useNotification';
+import { toast } from 'react-toastify';
 import { User } from '../types';
 import { userAPI, handleApiError } from '../services/api';
 import { User as UserIcon, Edit3, Save, X } from 'lucide-react';
@@ -8,8 +8,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Profile: React.FC = () => {
   const { user: authUser } = useAuth();
-  const { addNotification } = useNotification();
-  
+
   const [user, setUser] = useState<User | null>(authUser);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +35,7 @@ const Profile: React.FC = () => {
       setEmail(userData.email);
     } catch (error) {
       const apiError = handleApiError(error);
-      addNotification(apiError.message, 'error');
+      toast.error(apiError.message);
     } finally {
       setIsLoading(false);
     }
@@ -46,12 +45,12 @@ const Profile: React.FC = () => {
     if (!user?.id) return;
 
     if (!username.trim()) {
-      addNotification('Username cannot be empty', 'error');
+      toast.error('Username cannot be empty');
       return;
     }
 
     if (!email.trim()) {
-      addNotification('Email cannot be empty', 'error');
+      toast.error('Email cannot be empty');
       return;
     }
 
@@ -64,8 +63,8 @@ const Profile: React.FC = () => {
       
       setUser(updatedUser);
       setIsEditing(false);
-      addNotification('Profile updated successfully!', 'success');
-      
+      toast.success('Profile updated successfully!');
+
       // Update auth user data in localStorage
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
@@ -75,7 +74,7 @@ const Profile: React.FC = () => {
       }
     } catch (error) {
       const apiError = handleApiError(error);
-      addNotification(apiError.message, 'error');
+      toast.error(apiError.message);
     } finally {
       setIsSaving(false);
     }

@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Validated
@@ -57,7 +57,6 @@ public class RecommendationService {
         return recommendationRepo.findByActivityId(activityId, pageable);
     }
 
-    // Added missing method that controller is trying to call
     @Transactional(readOnly = true)
     public Page<Recommendation> getRecommendationsByUserIdAndActivityId(Long userId, String activityId, Pageable pageable) {
         validateLongId(userId);
@@ -115,42 +114,6 @@ public class RecommendationService {
             recommendationRepo.deleteAll(userRecommendations);
         } else {
         }
-    }
-
-    @Transactional(readOnly = true)
-    public boolean existsById(String id) {
-        validateStringId(id);
-        return recommendationRepo.existsById(id);
-    }
-
-    @Transactional(readOnly = true)
-    public long getTotalCount() {
-        return recommendationRepo.count();
-    }
-
-    @Transactional(readOnly = true)
-    public long getCountByUserId(Long userId) {
-        validateLongId(userId);
-        return recommendationRepo.countByUserId(userId);
-    }
-
-    @Transactional(readOnly = true)
-    public long getCountByActivityId(String activityId) {
-        validateStringId(activityId);
-        return recommendationRepo.countByActivityId(activityId);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Recommendation> findRecommendationsByUserIdAndActivityId(Long userId, String activityId) {
-        validateLongId(userId);
-        validateStringId(activityId);
-        return recommendationRepo.findByUserIdAndActivityId(userId, activityId);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Recommendation> findLatestRecommendationByUserId(Long userId) {
-        validateLongId(userId);
-        return recommendationRepo.findTopByUserIdOrderByCreatedAtDesc(userId);
     }
 
     // Private validation methods

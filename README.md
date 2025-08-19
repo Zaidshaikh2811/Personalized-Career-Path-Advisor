@@ -1,199 +1,233 @@
-#  Microservices Project
+# Child1 Fitness Platform
 
-This repository contains a microservices-based system for activity tracking, AI recommendations, authentication, user management, and API gateway routing. The project is built using Spring Boot, Spring Cloud, Docker, and other modern Java technologies.
+A scalable microservices-based fitness tracking and AI recommendation platform built with Java (Spring Boot), React, RabbitMQ, Docker, and more.
 
-## Project Structure
+---
 
+## Table of Contents
+- [System Overview](#system-overview)
+- [Architecture Diagram](#architecture-diagram)
+- [Microservices & Responsibilities](#microservices--responsibilities)
+- [API Endpoints](#api-endpoints)
+- [Data Flow & Working](#data-flow--working)
+- [Setup & Running Locally](#setup--running-locally)
+- [Docker & Deployment](#docker--deployment)
+- [Environment Variables](#environment-variables)
+- [Development & Testing](#development--testing)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## System Overview
+This platform allows users to:
+- Track fitness activities (CRUD)
+- Get AI-powered recommendations for activities
+- Manage authentication and user profiles
+- View dashboards and insights
+
+**Tech Stack:**
+- Java (Spring Boot) for backend microservices
+- React for frontend
+- RabbitMQ for messaging
+- Eureka for service discovery
+- Spring Cloud Config for centralized configuration
+- Docker for containerization
+
+---
+
+## Architecture Diagram
+
+```mermaid
+graph TD
+    subgraph Gateway
+        GW[API Gateway]
+    end
+    subgraph Frontend
+        FE[React App]
+    end
+    subgraph Services
+        AS[Activity Service]
+        AIS[AI Service]
+        US[User Service]
+        AUTH[Auth Service]
+        CS[Config Server]
+        EU[Eureka Server]
+    end
+    subgraph Messaging
+        MQ[RabbitMQ]
+    end
+
+    FE --> GW
+    GW --> AS
+    GW --> AIS
+    GW --> US
+    GW --> AUTH
+    AS <--> MQ
+    AIS <--> MQ
+    AS --> EU
+    AIS --> EU
+    US --> EU
+    AUTH --> EU
+    GW --> EU
+    AS --> CS
+    AIS --> CS
+    US --> CS
+    AUTH --> CS
+```
+
+---
+
+## Microservices & Responsibilities
 - **activity_service/**: Manages user activities (CRUD operations, metrics, etc.).
 - **ai_service/**: Provides AI-powered recommendations and analysis for activities.
 - **auth_service/**: Handles user authentication, registration, and JWT token management.
 - **user_service/**: Manages user profiles and related data.
 - **gateway/**: API Gateway for routing, load balancing, and authentication filtering.
+- **common-security/**: Shared security logic (JWT, filters).
 - **config_server/**: Centralized configuration management for all services.
 - **eureka/**: Service discovery using Netflix Eureka.
+- **frontend/**: React-based user interface.
 - **docker-compose.yml**: Container orchestration for local development.
 
-## Technologies Used
+---
 
+## API Endpoints
+
+### Activity Service
+- `POST /api/v1/activities/create` - Create activity
+- `GET /api/v1/activities` - List activities (paginated)
+- `GET /api/v1/activities/{id}` - Get activity by ID
+- `PUT /api/v1/activities/update/{id}` - Update activity
+- `DELETE /api/v1/activities/delete/{id}` - Delete activity
+- `GET /api/v1/activities/my-activities` - List user’s activities
+- `GET /api/v1/activities/recent` - Recent activities
+- `GET /api/v1/activities/top-calories` - Top calorie activities
+
+### AI Service
+- `GET /api/v1/recommendations` - List recommendations (paginated)
+- `GET /api/v1/recommendations/{id}` - Get recommendation by ID
+- `POST /api/v1/recommendations` - Create recommendation
+- `PUT /api/v1/recommendations/{id}` - Update recommendation
+- `DELETE /api/v1/recommendations/{id}` - Delete recommendation
+
+### Auth Service
+- `POST /api/v1/auth/register` - Register user
+- `POST /api/v1/auth/login` - Login
+
+### User Service
+- `GET /api/v1/users/{id}` - Get user profile
+- `PUT /api/v1/users/{id}` - Update user profile
+
+### Gateway
+- Routes all requests to appropriate microservices
+
+---
+
+## Data Flow & Working
+1. **User creates/updates/deletes an activity via frontend.**
+2. **Activity Service** processes the request and sends an event to RabbitMQ.
+3. **AI Service** listens to RabbitMQ, processes the activity, and generates recommendations using AI (Gemini API or similar).
+4. Recommendations are stored and can be fetched by the frontend.
+5. All services register with **Eureka** for service discovery.
+6. **Gateway** routes requests and applies security via **common-security**.
+
+---
+
+## Setup & Running Locally
+
+### Prerequisites
 - Java 17+
-- Spring Boot
-- Spring Cloud (Gateway, Config, Eureka)
+- Node.js 18+
 - Docker & Docker Compose
-- PostgreSQL (for persistence)
-- RabbitMQ (for messaging)
-- JWT (for authentication)
-- Lombok (for DTOs and models)
-- Maven (build tool)
 
-## How to Run
+### 1. Clone the repository
+```sh
+git clone <repo-url>
+cd java_proect
+```
 
-1. **Clone the repository**
-   ```
-   git clone <repo-url>
-   cd java_proect
-   ```
+### 2. Start RabbitMQ, Eureka, Config Server, and all services
+#### Using Docker Compose
+```sh
+docker-compose up --build
+```
+#### Or manually
+```sh
+./start-all.sh
+```
 
-2. **Start services with Docker Compose**
-   ```
-   docker-compose up -d
-   ```
+### 3. Start the frontend
+```sh
+cd frontend
+npm install
+npm run dev
+```
 
-3. **Build and run each microservice**
-   ```
-   cd <service-folder>
-   ./mvnw spring-boot:run
-   ```
+### 4. Access the app
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Eureka dashboard: [http://localhost:8761](http://localhost:8761)
+- RabbitMQ dashboard: [http://localhost:15672](http://localhost:15672) (default user/pass: guest/guest)
 
-4. **Access Eureka dashboard**
-   - Visit `http://localhost:8761` to see registered services.
+---
 
-5. **API Gateway**
-   - All APIs are accessible via the gateway at `http://localhost:8085` (or configured port).
+## Docker & Deployment
+- All services are containerized.
+- Use `docker-compose.yml` to orchestrate services.
+- For production, configure environment variables/secrets in Docker or your cloud provider.
 
-## Configuration
+---
 
-- Centralized configs are in `config_server/config/`.
-- Each service has its own `application.yml` for local overrides.
-- Sensitive keys (e.g., JWT secret, DB passwords) should be managed via environment variables or config server.
+## Environment Variables
+Each service uses its own `application.yml` for configuration. Key variables:
+- `rabbitmq.exchange.name`
+- `rabbitmq.queue.name`
+- `rabbitmq.routing.key`
+- `rabbitmq.update.queue.name`
+- `rabbitmq.update.routing.key`
+- `rabbitmq.delete.queue.name`
+- `rabbitmq.delete.routing.key`
+- `spring.datasource.*` (for DB config)
+- `jwt.secret` (for auth)
+Set these in your `application.yml` or as environment variables.
 
-## Endpoints Overview
+---
 
-- **Activity Service**: `/api/v1/activities`
-- **AI Service**: `/api/v1/ai`
-- **Auth Service**: `/api/v1/auth`
-- **User Service**: `/api/v1/users`
-- **Gateway**: Routes all requests and validates JWT tokens.
+## Development & Testing
+- **Backend:** Use `./mvnw spring-boot:run` in each service folder.
+- **Frontend:** Use `npm run dev`.
+- **Testing:** Use JUnit for backend, React Testing Library/Jest for frontend.
+- **Linting:** Use ESLint for frontend, Checkstyle for backend.
 
-## Development Notes
-
-- All routes except registration/login are protected by JWT.
-- Services communicate via REST and RabbitMQ.
-- Use Eureka for service discovery and Gateway for routing.
-- For local development, ensure Docker is running and ports are not conflicting.
+---
 
 ## Troubleshooting
+- **RabbitMQ exchange type error:** Ensure exchange type matches in config and RabbitMQ.
+- **Missing environment variables:** Check `application.yml` in each service.
+- **Service not registering:** Check Eureka and service logs.
+- **Frontend API errors:** Check gateway and backend logs.
 
-- If a service fails to start, check logs for missing configs, port conflicts, or missing dependencies.
-- Ensure all required Docker containers (DB, RabbitMQ) are running.
-- For database errors, verify credentials and network settings in `docker-compose.yml` and `application.yml`.
+---
 
-## Contribution
+## Contributing
+1. Fork the repo
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
 
-1. Fork the repo and create a feature branch.
-2. Make changes and add tests.
-3. Submit a pull request with a clear description.
+---
 
-# System Design & Working Overview
+## License
+MIT License
 
-## Architecture
+---
 
-This project is a distributed microservices system for activity tracking, user management, authentication, and AI-powered recommendations. It uses Spring Boot, Spring Cloud, Docker, and other modern Java technologies. The system is designed for scalability, modularity, and security.
+## Contact
+For questions or support, open an issue or contact the maintainers.
 
-### Microservices
-- **activity_service**: Handles CRUD operations for user activities, stores metrics, and sends activity data to RabbitMQ for AI analysis.
-- **ai_service**: Listens to activity messages, analyzes data using external AI APIs (e.g., Gemini), and returns recommendations.
-- **auth_service**: Manages user registration, login, and JWT token generation/validation. Integrates with user_service for profile management.
-- **user_service**: Manages user profiles and related data. Exposes REST APIs for user CRUD operations.
-- **gateway**: API Gateway for routing, load balancing, and authentication filtering. All requests pass through the gateway, which validates JWT tokens and forwards to the correct service.
-- **config_server**: Centralized configuration management for all services. Configs are stored in YAML files or Git and served to clients at startup.
-- **eureka**: Service discovery. All services register with Eureka, enabling dynamic routing and load balancing.
+---
 
-### Communication
-- **REST APIs**: Services communicate via HTTP endpoints exposed through the gateway.
-- **RabbitMQ**: Used for asynchronous messaging between activity_service and ai_service.
-- **Service Discovery**: Eureka enables dynamic lookup of service instances for routing and load balancing.
-- **Config Server**: All services fetch configuration from config_server at startup.
+**Diagrams and more details can be added as needed. For advanced deployment, CI/CD, and scaling, see the docs folder (if available).**
 
-## API Flow Example
-1. **User Registration/Login**
-   - User sends registration/login request to gateway (`/api/v1/auth/register` or `/api/v1/auth/login`).
-   - Gateway forwards to auth_service, which creates user or validates credentials, then returns a JWT token.
-2. **Protected API Call**
-   - User sends request (e.g., create activity) with JWT token in header to gateway (`/api/v1/activities`).
-   - Gateway validates token via auth_service before forwarding to activity_service.
-   - activity_service processes request, stores activity, and sends message to RabbitMQ.
-   - ai_service receives message, analyzes activity, and stores/sends recommendations.
-3. **User Profile Management**
-   - Requests to `/api/v1/users` are routed to user_service, which manages user data.
-
-## Security
-- **JWT Authentication**: All routes except registration/login are protected. Gateway validates tokens before forwarding requests.
-- **Password Encryption**: Passwords are hashed before storage.
-
-## Configuration & Deployment
-- **Config Server**: All configs (DB, RabbitMQ, API keys, etc.) are managed centrally and can be updated without redeploying services.
-- **Docker Compose**: Used to orchestrate all services, databases, and RabbitMQ for local development.
-- **Eureka**: Ensures all services are discoverable and enables load balancing.
-
-## Error Handling & Troubleshooting
-- Gateway returns 401 for invalid tokens, 404 for unknown routes, and 500 for internal errors.
-- Each service logs errors for easier debugging (e.g., DB connection issues, missing configs).
-- Config server and Eureka dashboards provide visibility into system health and configuration.
-
-## Extensibility
-- New microservices can be added easily by registering with Eureka and updating gateway routes.
-- Configs can be versioned and managed via Git for CI/CD.
-- AI service can be extended to support more models or external APIs.
-
-## Example API Endpoints
-- `POST /api/v1/auth/register` - Register user
-- `POST /api/v1/auth/login` - Login and get JWT
-- `GET /api/v1/auth/validate` - Validate JWT token
-- `POST /api/v1/activities` - Create activity
-- `GET /api/v1/activities/{id}` - Get activity
-- `POST /api/v1/ai/analyze` - Analyze activity
-- `GET /api/v1/users/{id}` - Get user profile
-
-## Monitoring & Scaling
-- Use Docker Compose for local orchestration; scale services by increasing container count.
-- Eureka and Gateway support horizontal scaling and load balancing.
-
-## Summary
-This system is a robust, scalable, and secure microservices architecture for activity tracking and AI recommendations, with centralized configuration, service discovery, and API gateway routing. All services are loosely coupled and can be developed, deployed, and scaled independently.
-
-For more details, see individual service README files or documentation in each folder.
-
-## System Architecture Diagram
-
-Below is a conceptual diagram of the microservices architecture. You can visualize or generate this using tools like draw.io, Lucidchart, or Mermaid:
-
-```
-+-------------------+        +-------------------+        +-------------------+
-|                   |        |                   |        |                   |
-|  User/Client      +------->|   API Gateway     +------->|   Microservices   |
-|                   |        |                   |        |                   |
-+-------------------+        +-------------------+        +-------------------+
-                                                        /      |      |      \
-                                                       /       |      |       \
-                                                      /        |      |        \
-                                        +----------------+ +----------------+ +----------------+ +----------------+
-                                        | activity_svc   | | ai_svc        | | user_svc      | | auth_svc      |
-                                        +----------------+ +----------------+ +----------------+ +----------------+
-                                                |                  |                 |                |
-                                                |                  |                 |                |
-                                                v                  v                 v                v
-                                         +-------------------------------------------------------------+
-                                         |                    RabbitMQ (Message Queue)                 |
-                                         +-------------------------------------------------------------+
-
-+-------------------+
-|                   |
-|   Config Server   |
-|                   |
-+-------------------+
-        ^
-        |
-+-------------------+
-|                   |
-|     Eureka        |
-|   (Service Disc.) |
-|                   |
-+-------------------+
-```
-
-- All microservices register with Eureka for service discovery.
-- Config Server provides configuration to all services.
-- API Gateway routes requests, validates JWT, and forwards to services.
-- activity_service and ai_service communicate asynchronously via RabbitMQ.
-
- 
+If you need a visual diagram file (e.g., PNG, SVG, or draw.io), let me know!

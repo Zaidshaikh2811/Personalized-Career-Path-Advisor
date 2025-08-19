@@ -43,10 +43,10 @@ public interface ActivityRepo extends MongoRepository<Activity, Long> {
     long countByUserId(Long userId);
 
 
-    Optional<Activity> findByIdAndUserId(Long id, Long userId);
+    Optional<Activity> findByIdAndUserId(String id, Long userId);
 
  
-    boolean existsByUserIdAndId(Long userId, Long id);
+    boolean existsByUserIdAndId(String userId, String id);
 
-    void deleteByUserIdAndId(Long userId, Long id);
+    void deleteByUserIdAndId(Long userId, String id);
 }

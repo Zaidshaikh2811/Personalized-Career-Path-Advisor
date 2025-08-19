@@ -52,11 +52,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (username: string, email: string, password: string): Promise<void> => {
+  const register = async (  email: string, password: string, name: string, firstName: string, lastName: string): Promise<void> => {
     try {
       setLoading(true);
-      const response = await authAPI.register(username, email, password);
-      
+      const response = await authAPI.register( email, password, name, firstName, lastName);
+
       setToken(response.token);
       setUser(response.user);
       

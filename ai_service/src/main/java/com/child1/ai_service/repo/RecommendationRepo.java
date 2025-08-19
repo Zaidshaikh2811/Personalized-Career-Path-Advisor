@@ -2,6 +2,7 @@ package com.child1.ai_service.repo;
 
 
 import com.child1.ai_service.model.Recommendation;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -80,4 +81,5 @@ public interface RecommendationRepo  extends MongoRepository<Recommendation, Str
             "] }")
     Page<Recommendation> findByUserIdAndSearchTerm(Long userId, String searchTerm, Pageable pageable);
 
+    Optional<Recommendation> findByActivityIdAndUserId(String activityId, @NotNull(message = "User ID is required") Long userId);
 }
