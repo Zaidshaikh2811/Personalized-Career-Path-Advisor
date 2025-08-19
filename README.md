@@ -218,16 +218,4 @@ Set these in your `application.yml` or as environment variables.
 
 ---
 
-## License
-MIT License
 
----
-
-## Contact
-For questions or support, open an issue or contact the maintainers.
-
----
-
-**Diagrams and more details can be added as needed. For advanced deployment, CI/CD, and scaling, see the docs folder (if available).**
-
-If you need a visual diagram file (e.g., PNG, SVG, or draw.io), let me know!
