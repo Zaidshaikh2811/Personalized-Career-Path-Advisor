@@ -1,4 +1,4 @@
-# FitNest Fitness Platform
+<img width="1621" height="1015" alt="System_Design" src="https://github.com/user-attachments/assets/a2c0a68c-720b-4a78-b9c6-a2fef5f3fe5d" /># FitNest Fitness Platform
 
 A scalable microservices-based fitness tracking and AI recommendation platform built with Java (Spring Boot), React, RabbitMQ, Docker, and more.
 
@@ -39,43 +39,11 @@ This platform allows users to:
 
 ## Architecture Diagram
 
-```mermaid
-graph TD
-    subgraph Gateway
-        GW[API Gateway]
-    end
-    subgraph Frontend
-        FE[React App]
-    end
-    subgraph Services
-        AS[Activity Service]
-        AIS[AI Service]
-        US[User Service]
-        AUTH[Auth Service]
-        CS[Config Server]
-        EU[Eureka Server]
-    end
-    subgraph Messaging
-        MQ[RabbitMQ]
-    end
+<img width="1621" height="1015" alt="System_Design" src="https://github.com/user-attachments/assets/7a5305fc-6d39-4c6e-b919-9686fc266fa3" />
 
-    FE --> GW
-    GW --> AS
-    GW --> AIS
-    GW --> US
-    GW --> AUTH
-    AS <--> MQ
-    AIS <--> MQ
-    AS --> EU
-    AIS --> EU
-    US --> EU
-    AUTH --> EU
-    GW --> EU
-    AS --> CS
-    AIS --> CS
-    US --> CS
-    AUTH --> CS
-```
+---
+## Sequence Diagram
+<img width="1317" height="3305" alt="sequence_Diagram" src="https://github.com/user-attachments/assets/0c06ac87-0833-4197-ab1d-b091419ea633" />
 
 ---
 
