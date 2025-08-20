@@ -1,4 +1,4 @@
-<img width="1621" height="1015" alt="System_Design" src="https://github.com/user-attachments/assets/a2c0a68c-720b-4a78-b9c6-a2fef5f3fe5d" /># FitNest Fitness Platform
+# FitNest Fitness Platform
 
 A scalable microservices-based fitness tracking and AI recommendation platform built with Java (Spring Boot), React, RabbitMQ, Docker, and more.
 
