@@ -44,7 +44,7 @@ This platform allows users to:
 ---
 ## Sequence Diagram
 
-<img width="3120" height="1317" alt="sequence_Diagram" src="https://github.com/user-attachments/assets/f1b0367a-1fd3-4b50-9cfc-375cbc590d18" />
+<img width="1317" height="3120" alt="sequence_Diagram" src="https://github.com/user-attachments/assets/b7239002-45e2-4b55-a226-9075f282ff17" />
 
 
 ---
