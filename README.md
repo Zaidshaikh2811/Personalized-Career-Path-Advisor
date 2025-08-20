@@ -39,11 +39,13 @@ This platform allows users to:
 
 ## Architecture Diagram
 
-<img width="1621" height="1015" alt="System_Design" src="https://github.com/user-attachments/assets/7a5305fc-6d39-4c6e-b919-9686fc266fa3" />
+<img width="1621" height="904" alt="System_Design" src="https://github.com/user-attachments/assets/4cb51ed9-ca86-4987-9162-c53f492cbca0" />
 
 ---
 ## Sequence Diagram
-<img width="1317" height="3305" alt="sequence_Diagram" src="https://github.com/user-attachments/assets/0c06ac87-0833-4197-ab1d-b091419ea633" />
+
+<img width="3120" height="1317" alt="sequence_Diagram" src="https://github.com/user-attachments/assets/f1b0367a-1fd3-4b50-9cfc-375cbc590d18" />
+
 
 ---
 
